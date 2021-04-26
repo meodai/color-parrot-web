@@ -39,9 +39,12 @@
         v-bind:isVisible="show"
       ></colorswatch>
     </section>
+    <color3d v-bind:colors="colors">
+    </color3d>
     <ul>
       <li v-for="c,i in namesSortedByLum" v-bind:key="i" :style="{'background': c.requestedHex}">{{c.name}}</li>
     </ul>
+
   </main>
 </template>
 
@@ -49,6 +52,7 @@
 import Vue from "vue";
 import colorinput from './components/color-input';
 import colorswatch from './components/color-swatch';
+import color3d from './components/color-3d';
 import chroma from 'chroma-js';
 
 const sorts = {
@@ -59,7 +63,8 @@ const sorts = {
 export default Vue.extend({
   components: {
     colorinput,
-    colorswatch
+    colorswatch,
+    color3d,
   },
   data() {
     return {
