@@ -41,10 +41,6 @@
     </section>
     <color3d v-bind:colors="colors">
     </color3d>
-    <ul>
-      <li v-for="c,i in namesSortedByLum" v-bind:key="i" :style="{'background': c.requestedHex}">{{c.name}}</li>
-    </ul>
-
   </main>
 </template>
 

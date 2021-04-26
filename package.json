@@ -48,7 +48,8 @@
     "chroma-js": "^2.1.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4",
-    "zdog": "^1.1.2"
+    "zdog": "^1.1.2",
+    "zfont": "^1.2.8"
   },
   "sitemap": {
     "siteURL": "https://www.elastiq.ch/",
