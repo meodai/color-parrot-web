@@ -41,7 +41,7 @@
 
         const w = this.illo.width;
         const h = this.illo.height;
-        const s = Math.min(w,h) * .7;
+        const s = Math.min(w,h) * .4;
         const stroke = 2;
 
         new Zdog.Shape({
@@ -170,7 +170,7 @@
 
         const w = this.illo.width;
         const h = this.illo.height;
-        const s = Math.min(w,h) * .7;
+        const s = Math.min(w,h) * .4;
 
         this.colors.forEach(color => {
           const position = color[this.currentMode]();
@@ -178,7 +178,7 @@
           const shape = new Zdog.Shape({
             addTo: this.illo,
             // no path set, default to single point
-            stroke: 5,
+            stroke: 10,
             color: color.hex(),
             translate: {
               x: s * position[0] - (s * .5),
