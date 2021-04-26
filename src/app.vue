@@ -6,18 +6,21 @@
     <input type="checkbox" v-model="show" />
     <span>show</span>
     </label>
+    |
     <label>
     <input type="checkbox" v-model="goodnamesonly" />
-    <span>goodnamesonly</span>
+    <span>Better color-names</span>
     </label>
+    |
     <label>
       <select v-model="sort">
         <option value="">Default</option>
         <option value="magic">Magic</option>
         <option value="luminance">Luminance</option>
       </select>
-    <span>Better color-names</span>
+    <span>Sorting</span>
     </label>
+    |
     <label>
       <select v-model="colorDisplayMode">
         <option value="hex">hex</option>
