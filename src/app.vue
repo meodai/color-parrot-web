@@ -113,18 +113,23 @@ export default Vue.extend({
   },
   methods: {
     newRandomColors: function () {
-      this.colors = [
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-      ];
-      this.fetchNames();
+      this.show = false;
+
+      setTimeout(() => {
+        this.colors = [
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+        ];
+        this.fetchNames();
+      }, 500);
+
     },
     colorValue: function(color) {
       let colorValue = color[this.colorDisplayMode]();
