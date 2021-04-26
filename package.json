@@ -2,7 +2,7 @@
   "name": "color-parrot-www",
   "version": "1.0.0",
   "description": "company website",
-  "main": "index.js",
+  "app": "src/index.html",
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/*.html",
@@ -12,6 +12,12 @@
     "lint:js": "eslint --ext .js",
     "lint:css": "npm run lint:css:scss",
     "lint:css:scss": "stylelint 'src/**/*.scss'"
+  },
+  "targets": {
+    "main": false,
+    "browser": {
+      "publicUrl": "./"
+    }
   },
   "repository": {
     "type": "git",
@@ -25,12 +31,13 @@
   },
   "homepage": "https://github.com/meodai/elastiq#readme",
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.1.2",
+    "@vue/component-compiler-utils": "^3.2.0",
     "autoprefixer": "^9.7.6",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-sitemap": "^2.1.6",
     "parcel-plugin-static-files-copy": "^2.3.1",
+    "postcss": "^8.2.13",
     "postcss-modules": "^2.0.0",
-    "posthtml-expressions": "^1.4.1",
     "sass": "^1.26.5",
     "vue-template-compiler": "^2.6.11"
   },
@@ -38,7 +45,6 @@
     "staticPath": "public"
   },
   "dependencies": {
-    "bad-words": "^3.0.4",
     "chroma-js": "^2.1.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
