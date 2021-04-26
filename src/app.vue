@@ -44,15 +44,17 @@
     </section>
     <color3d v-bind:colors="colors">
     </color3d>
+    <colorgradient v-bind:colors="sortedColors">
+    </colorgradient>
   </main>
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import Vue from "vue";
-import colorinput from './components/color-input';
 import colorswatch from './components/color-swatch';
 import color3d from './components/color-3d';
-import chroma from 'chroma-js';
+import colorgradient from './components/color-gradient';
 
 const sorts = {
   'magic': colors => colors.sort((a, b) => (b.luminance() - a.luminance()) - (b.hcl()[0] - a.hcl()[0])),
@@ -61,9 +63,9 @@ const sorts = {
 
 export default Vue.extend({
   components: {
-    colorinput,
     colorswatch,
     color3d,
+    colorgradient
   },
   data() {
     return {
