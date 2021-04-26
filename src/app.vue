@@ -66,14 +66,7 @@ export default Vue.extend({
     return {
       colors: [
         chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
-        chroma.random(),
+        chroma.random()
       ],
       colorDisplayMode: 'hex',
       show: false,
@@ -113,6 +106,31 @@ export default Vue.extend({
     }
   },
   methods: {
+    urlToColors: function () {
+      if( window.location.hash ) {
+        let hashStr = window.location.hash;
+        hashStr = hashStr.substring(1);
+        const rawColors = hashStr.split('-');
+
+        this.colors = rawColors
+          .map(rawColor => chroma.valid('#' + rawColor) && chroma('#' + rawColor))
+          .filter(c => c);
+      }
+
+      if ( !window.location.hash || !this.colors.length) {
+        this.colors = [
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+          chroma.random(),
+        ]
+      }
+    },
     newRandomColors: function () {
       this.show = false;
 
@@ -166,11 +184,11 @@ export default Vue.extend({
           this.show = true;
         }, 200);
         this.colorNames = Object.freeze(data.colors);
-        console.log(this.colorNames)
       });
     }
   },
   mounted () {
+    this.urlToColors();
     this.fetchNames();
   },
 });
