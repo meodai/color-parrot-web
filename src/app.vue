@@ -1,6 +1,7 @@
 
 <template>
   <main v-bind:class="{'is-ready': isReady}">
+    <h1 class="palette__title">{{paletteName}}</h1>
     <label>
     <input type="checkbox" v-model="show" />
     <span>show</span>
@@ -13,18 +14,21 @@
       <select v-model="sort">
         <option value="">Default</option>
         <option value="magic">Magic</option>
+        <option value="luminance">Luminance</option>
       </select>
     <span>Better color-names</span>
     </label>
     <label>
       <select v-model="colorDisplayMode">
         <option value="hex">hex</option>
+        <option value="rgb">rgb</option>
         <option value="hsl">hsl</option>
         <option value="lab">lab</option>
         <option value="cmyk">cmyk</option>
       </select>
     <span>Color Values</span>
     </label>
+    <button @click="newRandomColors">new colors</button>
     <section class="swatches">
       <colorswatch
         v-for="(c, i) in colorNames"
@@ -35,6 +39,9 @@
         v-bind:isVisible="show"
       ></colorswatch>
     </section>
+    <ul>
+      <li v-for="c,i in namesSortedByLum" v-bind:key="i" :style="{'background': c.requestedHex}">{{c.name}}</li>
+    </ul>
   </main>
 </template>
 
@@ -46,6 +53,7 @@ import chroma from 'chroma-js';
 
 const sorts = {
   'magic': colors => colors.sort((a, b) => (b.luminance() - a.luminance()) - (b.hcl()[0] - a.hcl()[0])),
+  'luminance': colors => colors.sort((a, b) => (b.luminance() - a.luminance())),
 };
 
 export default Vue.extend({
@@ -75,8 +83,17 @@ export default Vue.extend({
     }
   },
   computed: {
+    paletteName: function getNamePart(name1, name2) {
+      if (!this.namesSortedByLum.length) return '';
+      const first = this.namesSortedByLum[0].name.match(/[^\s-]+-?/g)[0];
+      const last = this.namesSortedByLum[this.namesSortedByLum.length - 1].name.match(/[^\s-]+-?/g);
+      return `${first} ${last[last.length - 1]}`;
+    },
     colorsHex: function () {
       return this.sortedColors.map(c => c.hex());
+    },
+    namesSortedByLum: function () {
+      return [...this.colorNames].sort((a,b) => chroma(b.requestedHex).luminance() - chroma(a.requestedHex).luminance() )
     },
     sortedColors: function () {
       if (sorts.hasOwnProperty(this.sort)) {
@@ -95,6 +112,20 @@ export default Vue.extend({
     }
   },
   methods: {
+    newRandomColors: function () {
+      this.colors = [
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+        chroma.random(),
+      ];
+      this.fetchNames();
+    },
     colorValue: function(color) {
       let colorValue = color[this.colorDisplayMode]();
 
@@ -105,6 +136,8 @@ export default Vue.extend({
         colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.floor(v)}`,'');
       } else if (this.colorDisplayMode === 'cmyk') {
         colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.floor(v * 100)}°`,'');
+      } else if (this.colorDisplayMode === 'rgb') {
+        colorValue = colorValue.reduce((r,v,i) => `${r} ${v}`,'');
       }
       return colorValue;
     },
@@ -127,7 +160,7 @@ export default Vue.extend({
           this.show = true;
         }, 200);
         this.colorNames = Object.freeze(data.colors);
-
+        console.log(this.colorNames)
       });
     }
   },
@@ -178,11 +211,17 @@ input {
   display: flex;
   flex-wrap: wrap;
   margin: 0.5rem auto;
+  align-content: center;
+  justify-content: center;
 
   .colorswatch {
     flex: 0 0 calc(33.333% - 2rem);
     margin: .5rem;
   }
+}
+
+.palette__title {
+  font-size: 3rem;
 }
 
 </style>
