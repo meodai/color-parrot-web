@@ -1,0 +1,52 @@
+{
+  "name": "color-parrot-www",
+  "version": "1.0.0",
+  "description": "company website",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/*.html",
+    "test": "npm run build",
+    "pretest": "npm run lint",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint --ext .js",
+    "lint:css": "npm run lint:css:scss",
+    "lint:css:scss": "stylelint 'src/**/*.scss'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meodai/elastiq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meodai/elastiq/issues"
+  },
+  "homepage": "https://github.com/meodai/elastiq#readme",
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.2",
+    "autoprefixer": "^9.7.6",
+    "parcel-plugin-sitemap": "^2.1.6",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "postcss-modules": "^2.0.0",
+    "posthtml-expressions": "^1.4.1",
+    "sass": "^1.26.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "staticFiles": {
+    "staticPath": "public"
+  },
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "chroma-js": "^2.1.1",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "sitemap": {
+    "siteURL": "https://www.elastiq.ch/",
+    "exclude": [
+      "googleb38071574b573624.html"
+    ]
+  }
+}
