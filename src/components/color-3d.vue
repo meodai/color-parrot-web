@@ -42,8 +42,8 @@
       addBox: function () {
         const w = this.illo.width;
         const h = this.illo.height;
-        const s = Math.min(w,h) * .4;
-        const stroke = 2;
+        const s = Math.min(w,h) * .6;
+        const stroke = 10;
 
         new Zdog.Shape({
           addTo: this.illo,
@@ -164,13 +164,11 @@
           stroke: stroke,
           color: '#fff',
         });
-
-
       },
       addShapes: function () {
         const w = this.illo.width;
         const h = this.illo.height;
-        const s = Math.min(w,h) * .4;
+        const s = Math.min(w,h) * .6;
 
         this.colors.forEach(color => {
           const position = color[this.currentMode]();
@@ -178,7 +176,7 @@
           const shape = new Zdog.Shape({
             addTo: this.illo,
             // no path set, default to single point
-            stroke: 10,
+            stroke: 30,
             color: color.hex(),
             translate: {
               x: s * position[0] - (s * .5),
@@ -199,7 +197,7 @@
 
         const w = this.illo.width;
         const h = this.illo.height;
-        const s = Math.min(w,h) * .4;
+        const s = Math.min(w,h) * .6;
 
         this.labels.push(
           new Zdog.Text({
@@ -266,7 +264,7 @@
       this.createCanvas();
       this.addShapes();
       this.addBox();
-      this.addLabels();
+      //  this.addLabels();
 
       this.illo.updateRenderGraph();
       this.illo.rotate.x -= 10;

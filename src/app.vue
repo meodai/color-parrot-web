@@ -27,6 +27,7 @@
           <select v-model="colorDisplayMode">
             <option value="hex">hex</option>
             <option value="rgb">rgb</option>
+            <option value="gl">rgb-percent</option>
             <option value="hsl">hsl</option>
             <option value="lab">lab</option>
             <option value="cmyk">cmyk</option>
@@ -180,6 +181,9 @@ export default Vue.extend({
         colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.floor(v * 100)}°`,'');
       } else if (this.colorDisplayMode === 'rgb') {
         colorValue = colorValue.reduce((r,v,i) => `${r} ${v}`,'');
+      } else if (this.colorDisplayMode === 'gl') {
+        colorValue.pop();
+        colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.round(v*100)}%`,'');
       }
       return colorValue;
     },
