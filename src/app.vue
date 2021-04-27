@@ -232,6 +232,10 @@ body, html {
   line-height: 1.4;
 }
 
+body {
+  padding-right: calc(12rem + 2rem);
+}
+
 h1,
 h2,
 h3,
@@ -254,13 +258,13 @@ input {
   max-width: 40rem;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 calc(var(--s-gutter) - 1.5rem) var(--s-gutter);
+  margin: 0 calc(var(--s-gutter) - 1rem) var(--s-gutter);
   align-content: center;
   justify-content: center;
 
   .colorswatch {
-    flex: 0 0 calc(33.333% - 3rem);
-    margin: 1.5rem;
+    flex: 0 0 calc(33.333% - 2rem);
+    margin: 1rem;
   }
 }
 
@@ -279,16 +283,18 @@ input {
 .pannel {
   z-index: 3;
   position: fixed;
-  right: var(--s-gutter);
-  top: var(--s-gutter);
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 12rem;
 
-  --color-bg:  #fff;
-  --color-inverted: #212121;
+  --color-bg: #212121;
+  --color-inverted: #fff;
   --size-gutter: 0.5rem;
 
-  box-sizing: border-box;
   padding: calc(var(--size-gutter) * 2);
+  padding-top: calc(var(--s-gutter) + var(--size-gutter));
+  padding-right: var(--s-gutter);
   background: var(--color-bg);
   //backdrop-filter: blur(5px);
 
