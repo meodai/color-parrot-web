@@ -6,12 +6,14 @@
       <div class="colorswatch__shade" v-bind:style="{backgroundColor: color.hex()}"></div>
     </div>
     <header class="colorswatch__label">
-      <h1 class="colorswatch__row1">
-        <span>{{colorValue}}</span>
-      </h1>
-      <h2 class="colorswatch__row2">
-        <span>{{name}}</span>
-      </h2>
+      <div class="colorswatch__info">
+        <h1 class="colorswatch__row1">
+          <span>{{colorValue}}</span>
+        </h1>
+        <h2 class="colorswatch__row2">
+          <span>{{name}}</span>
+        </h2>
+      </div>
     </header>
   </article>
 </template>
@@ -49,15 +51,15 @@
 </script>
 
 <style lang="scss">
+
 .colorswatch {
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 
   &__swatch {
     position: relative;
-    padding-top: 100%;
+    padding-top: calc(100% + 1px);
     z-index: 1;
+    overflow: hidden;
   }
 
   &__shade {
@@ -68,13 +70,23 @@
 
   &__label {
     position: relative;
+    height: 3.25rem;
+    flex: 0 0 3.25rem;
     z-index: 2;
-    flex-grow: 1;
+    margin-top: -1px;
+    background: #212121;
+  }
+
+  &__info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     background: #fff;
     padding: 0 .5rem;
     color: #212121;
     transform-origin: 50% 0;
-    box-shadow: 0 0 0 1px rgba(#000,.05);
+    //box-shadow: 0 0 0 1px rgba(#000,.05);
 
     span  {
       display: block;
@@ -117,7 +129,7 @@
 
   --anim-appear-duration: 1100ms;
 
-  &__label {
+  &__info {
     height: 0;
     transition: calc(var(--anim-appear-duration) * 0.2) height cubic-bezier(.7,.3,0,1);
     transition-delay: calc(var(--anim-appear-duration) * 0.3);
@@ -160,7 +172,7 @@
   }
 
   .colorswatch--visible & {
-    &__label {
+    &__info {
       height: 3.25rem;
       transition: calc(var(--anim-appear-duration) * .6) height cubic-bezier(.7,.3,0,1);
       transition-delay: var(--anim-appear-delay, 0ms);
