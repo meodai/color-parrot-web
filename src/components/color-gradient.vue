@@ -15,11 +15,9 @@
       gradient: function () {
         //return `linear-gradient(45deg, ${this.colors.join(',')})`;
         const part = 360 / this.colors.length;
-        console.log(
-          this.colors
-        );
+
         return this.colors.reduce((r,c,i) =>
-        `${r}${r ? ',' : ''}linear-gradient(${part * i}deg,${c.alpha(.99).css()},${c.alpha(0).css()})`
+        `${r}${r ? ',' : ''}linear-gradient(${30 + part * i}deg,${c.alpha(.99).css()},${c.alpha(0).css()})`
         , '');
       },
     },
