@@ -123,6 +123,7 @@
     transition-delay: calc(var(--anim-appear-duration) * 0.3);
     overflow: hidden;
     box-sizing: border-box;
+    will-change: height;
   }
   &__row1,
   &__row2 {
