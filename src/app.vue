@@ -239,13 +239,13 @@ input {
   max-width: 40rem;
   display: flex;
   flex-wrap: wrap;
-  margin: 0.5rem auto;
+  margin: 5rem auto;
   align-content: center;
   justify-content: center;
 
   .colorswatch {
-    flex: 0 0 calc(33.333% - 2rem);
-    margin: .5rem;
+    flex: 0 0 calc(33.333% - 3rem);
+    margin: 1.5rem;
   }
 }
 
