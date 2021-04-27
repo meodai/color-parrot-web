@@ -267,7 +267,7 @@
       //  this.addLabels();
 
       this.illo.updateRenderGraph();
-      this.illo.rotate.x -= 10;
+      this.illo.rotate.x -= .1;
 
       const animate = () => {
         // rotate illo each frame
