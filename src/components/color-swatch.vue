@@ -32,16 +32,16 @@
       },
       shade0: function () {
         if (this.lum < .5) {
-          return this.color.brighten(3);
+          return this.color.brighten(1.5);
         } else {
-          return this.color.darken(3);
+          return this.color.darken(1.5);
         }
       },
       shade1: function () {
         if (this.lum < .5) {
-          return this.color.brighten(1.5);
+          return this.color.brighten(.75);
         } else {
-          return this.color.darken(1.5);
+          return this.color.darken(.75);
         }
       },
     },
@@ -71,7 +71,7 @@
     z-index: 2;
     flex-grow: 1;
     background: #fff;
-    padding: .45rem .5rem;
+    padding: 0 .5rem;
     color: #212121;
     transform-origin: 50% 0;
     box-shadow: 0 0 0 1px rgba(#000,.05);
@@ -83,12 +83,24 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: .4rem solid #fff;
+      pointer-events: none;
+    }
   }
 
   &__row1 {
     font-weight: 700;
     font-size: 1.1em;
     height: 1.2em;
+    margin-top: 0.45rem;
   }
 
   &__row2 {
@@ -106,18 +118,17 @@
   --anim-appear-duration: 1100ms;
 
   &__label {
-    transform: scaleY(0);
-    transition: calc(var(--anim-appear-duration) * 0.2) transform cubic-bezier(.7,.3,0,1);
+    height: 0;
+    transition: calc(var(--anim-appear-duration) * 0.2) height cubic-bezier(.7,.3,0,1);
     transition-delay: calc(var(--anim-appear-duration) * 0.3);
+    overflow: hidden;
+    box-sizing: border-box;
   }
   &__row1,
   &__row2 {
-    span {
-      //opacity: 0;
-      height: 0;
-      transform: translateY(120%);
-      transition: calc(var(--anim-appear-duration) * 0.1) opacity linear, calc(var(--anim-appear-duration) * 0.2) height cubic-bezier(.7,.3,0,1), calc(var(--anim-appear-duration) * 0.2) transform cubic-bezier(.7,.3,0,1);
-    }
+    //opacity: 0;
+    transform: translateY(200%);
+    transition: calc(var(--anim-appear-duration) * 0.1) opacity linear, calc(var(--anim-appear-duration) * 0.2) height cubic-bezier(.7,.3,0,1), calc(var(--anim-appear-duration) * 0.2) transform cubic-bezier(.7,.3,0,1);
   }
   &__swatch {
     transform: translateY(150%);
@@ -148,32 +159,27 @@
   }
 
   .colorswatch--visible & {
-
     &__label {
-      transform: scaleY(1);
-      transition: calc(var(--anim-appear-duration) * .2) transform cubic-bezier(.7,.3,0,1);
+      height: 3.25rem;
+      transition: calc(var(--anim-appear-duration) * .6) height cubic-bezier(.7,.3,0,1);
       transition-delay: var(--anim-appear-delay, 0ms);
     }
     &__row1,
     &__row2 {
-      span {
-        opacity: 1;
-        height: 100%;
-        transform: translateY(0%);
-        transition: calc(var(--anim-appear-duration) * .05) opacity linear,
-                    calc(var(--anim-appear-duration) * .25) height cubic-bezier(.8,.3,.25,1),
-                    calc(var(--anim-appear-duration) * .25) transform cubic-bezier(.8,.3,.25,1);
+      opacity: 1;
+      transform: translateY(0%);
+      transition: calc(var(--anim-appear-duration) * .05) opacity linear,
+                  calc(var(--anim-appear-duration) * .7) height cubic-bezier(.8,.3,.25,1),
+                  calc(var(--anim-appear-duration) * .7) transform cubic-bezier(.8,.3,.25,1);
 
-        transition-delay: calc(var(--anim-appear-duration) * .1),
-                          calc(var(--anim-appear-duration) * .1);
-        transform-origin: 0 0;
-      }
+      transition-delay: calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * 0ms),
+                        calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * 0ms);
+      transform-origin: 0 0;
+
     }
     &__row2 {
-      span {
-        transition-delay: calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .15),
-                          calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .15);
-      }
+      transition-delay: calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .05),
+                        calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .05);
     }
     &__swatch {
       transform: translateY(0);
