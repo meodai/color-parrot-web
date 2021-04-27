@@ -1,37 +1,50 @@
 
 <template>
-  <main v-bind:class="{'is-ready': isReady}">
+  <main class="app" v-bind:class="{'is-ready': isReady}">
     <h1 class="palette__title">{{paletteName}}</h1>
-    <label>
-    <input type="checkbox" v-model="show" />
-    <span>show</span>
-    </label>
-    |
-    <label>
-    <input type="checkbox" v-model="goodnamesonly" />
-    <span>Better color-names</span>
-    </label>
-    |
-    <label>
-      <select v-model="sort">
-        <option value="">Default</option>
-        <option value="magic">Magic</option>
-        <option value="luminance">Luminance</option>
-      </select>
-    <span>Sorting</span>
-    </label>
-    |
-    <label>
-      <select v-model="colorDisplayMode">
-        <option value="hex">hex</option>
-        <option value="rgb">rgb</option>
-        <option value="hsl">hsl</option>
-        <option value="lab">lab</option>
-        <option value="cmyk">cmyk</option>
-      </select>
-    <span>Color Values</span>
-    </label>
-    <button @click="newRandomColors">new colors</button>
+
+    <aside aria-label="options" class="pannel">
+      <!--label class="pannel__setting pannel__setting--inline">
+        <input type="checkbox" v-model="show" />
+        <i class="pannel__checkbox"></i>
+        <strong class="pannel__settingtitle">Show</span>
+      </label-->
+
+      <label class="pannel__setting">
+        <strong class="pannel__settingtitle">Sorting</strong>
+        <div class="pannel__inputs">
+          <select v-model="sort">
+            <option value="">Default</option>
+            <option value="magic">Magic</option>
+            <option value="luminance">Luminance</option>
+          </select>
+        </div>
+      </label>
+
+      <label class="pannel__setting">
+        <strong class="pannel__settingtitle">Color Values</strong>
+        <div class="pannel__inputs">
+          <select v-model="colorDisplayMode">
+            <option value="hex">hex</option>
+            <option value="rgb">rgb</option>
+            <option value="hsl">hsl</option>
+            <option value="lab">lab</option>
+            <option value="cmyk">cmyk</option>
+          </select>
+        </div>
+      </label>
+
+      <label class="pannel__setting pannel__setting--inline">
+
+        <input type="checkbox" v-model="goodnamesonly" />
+        <i class="pannel__checkbox"></i>
+        <strong class="pannel__settingtitle">Better color-names</strong>
+      </label>
+
+
+      <button @click="newRandomColors">new colors</button>
+    </aside>
+
     <section class="swatches">
       <colorswatch
         v-for="(c, i) in colorNames"
@@ -209,6 +222,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
   --c-bg: #212121;
   --c-color: #fff;
 
+  --s-gutter: 3rem;
+
   background: var(--c-bg);
   color: var(--c-color);
 }
@@ -239,7 +254,7 @@ input {
   max-width: 40rem;
   display: flex;
   flex-wrap: wrap;
-  margin: 5rem auto;
+  margin: 0 calc(var(--s-gutter) - 1.5rem) var(--s-gutter);
   align-content: center;
   justify-content: center;
 
@@ -251,6 +266,264 @@ input {
 
 .palette__title {
   font-size: 3rem;
+  position: fixed;
+  top: var(--s-gutter);
+  left: var(--s-gutter);
 }
+
+.app {
+  padding-top: calc(3rem + var(--s-gutter) * 2);
+}
+
+
+.pannel {
+  z-index: 3;
+  position: fixed;
+  right: var(--s-gutter);
+  top: var(--s-gutter);
+  width: 12rem;
+
+  --color-bg:  #fff;
+  --color-inverted: #212121;
+  --size-gutter: 0.5rem;
+
+  box-sizing: border-box;
+  padding: calc(var(--size-gutter) * 2);
+  background: var(--color-bg);
+  //backdrop-filter: blur(5px);
+
+  display: block;
+  cursor: default;
+
+  color: var(--color-inverted);
+
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox]:checked + &__checkbox {
+    &::after {
+      opacity: 1;
+      transform: translate(-55%, -50%) scale(.8);
+    }
+  }
+
+  &__checkbox {
+    position: relative;
+    display: inline-block;
+    width: .8em;
+    height: .8em;
+    border: 1px solid var(--color-inverted);
+    margin-top: -0.2em;
+
+    &::after {
+      opacity: 0;
+      content: '✓';
+      transform: translate(-55%, -50%) scale(.1);
+      transition: 60ms opacity linear,
+                  120ms transform cubic-bezier(0.7, 0.3, .8, 2);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  &__setting {
+    display: block;
+    touch-action: manipulation;
+
+    & + & {
+      margin-top: calc(var(--size-gutter) * 2);
+    }
+
+    &--inline {
+      display: flex;
+      align-items: center;
+      .pannel__settingtitle {
+        margin-left: calc(var(--size-gutter) * .5);
+      }
+    }
+  }
+
+  &__desc {
+    margin: 1em 0 3em;
+    font-size: .6em;
+  }
+
+  select {
+    font-size: .8em;
+    border-radius: 2rem;
+    padding: .2rem;
+  }
+
+  input, select {
+    display: block;
+    box-sizing: border-box;
+    touch-action: manipulation;
+    font-family: 'Space Mono', monospace;
+    border: none;
+    width: auto;
+
+    &[type=number] {
+      color: var(--color-inverted);
+      background: none;
+      border: none;
+      text-align: right;
+      font-size: .8em;
+      flex: 0 0 3rem;
+      width: 3rem;
+    }
+  }
+  input {
+    background-color: transparent;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=range],
+  input[type=color] {
+    -webkit-appearance: none;
+  }
+
+  // range sliders
+  input[type=range] {
+    margin: 0;
+    padding-top: 0.7em;
+    margin-top: -0.7em;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      //height: .65rem;
+      background-color: var(--color-inverted);
+      clip-path: polygon(100% 0%, 0% 0%, 50% 100%, 50% 100%);
+      //clip-path: polygon(50% 0%, 50% 0%, 0% 100%, 100% 100%);
+    }
+  }
+
+  @mixin slider-track {
+    width: 100%;
+    height: 1rem;
+    animate: 0.2s;
+    background: transparent;
+    color: var(--c-black);
+    border-radius: 0;
+    border: solid var(--color-inverted);
+    border-width: 0 0 1px;
+  }
+
+  @mixin slider-thumb {
+    border: 2px solid transparent;
+    height: .75rem;
+    width: .5rem;
+    border-radius: 0;
+    background: var(--color-inverted);
+    -webkit-appearance: none;
+    margin-top: 0.25rem;
+    transition: 150ms background-color, 200ms clip-path, 200ms -webkit-clip-path;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    @include slider-track;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    @include slider-thumb;
+  }
+
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    //background: $c-black;
+  }
+
+  input[type=range]::-moz-range-track {
+    @include slider-track;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    @include slider-thumb;
+  }
+
+  input[type=range]::-ms-track {
+    @include slider-track;
+  }
+
+  input[type=range]::-ms-fill-lower {
+    background: var(--color-inverted);
+    border: none;
+    border-radius: 100%;
+  }
+
+  input[type=range]::-ms-fill-upper {
+    background: var(--color-inverted);
+    border-radius: 100%;
+    box-shadow: none;
+  }
+
+  input[type=range]::-ms-thumb {
+    @include slider-thumb;
+  }
+
+  select {
+    color: var(--color-inverted);
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    border: 0;
+    box-shadow: 0 1px 0 0 var(--color-inverted);
+    border-radius: 0;
+    padding: 0.25rem 1rem 0.25rem 0rem;
+    background-color: transparent;
+    background-size: 1.25em 1.25em;
+    background-image: conic-gradient(var(--color-inverted) 5%, transparent 0 95%, var(--color-inverted) 0);
+    background-repeat: no-repeat;
+    background-position: right 0% top 120%;
+
+    option {
+      color: var(--color-bg);
+    }
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+  }
+}
+
+.pannel__settingtitle {
+  font-weight: 900;
+  font-size: 0.7rem;
+  line-height: 1;
+  margin-bottom: .4em;
+
+  i {
+    display: inline-block;
+    font-size: .7em;
+    margin-left: 1em;
+  }
+}
+
+.pannel__inputs,
+.pannel__settingtitle {
+  display: flex;
+  > *:first-child {
+    flex: 1 0 auto;
+  }
+}
+
+
 
 </style>
