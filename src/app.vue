@@ -1,8 +1,8 @@
 
 <template>
   <main class="app" v-bind:class="{'is-ready': isReady}">
-    <h1 class="palette__title">{{paletteName}}</h1>
-    <span aria-hidden class="palette__title palette__title--placeholder">{{paletteName}}</span>
+    <h1 class="palette__title" v-html="paletteName"></h1>
+    <span aria-hidden class="palette__title palette__title--placeholder" v-html="paletteName"></span>
     <aside aria-label="options" class="pannel">
       <!--label class="pannel__setting pannel__setting--inline">
         <input type="checkbox" v-model="show" />
@@ -99,7 +99,7 @@ export default Vue.extend({
       if (!this.namesSortedByLum.length) return '';
       const first = this.namesSortedByLum[0].name.match(/[^\s-]+-?/g)[0];
       const last = this.namesSortedByLum[this.namesSortedByLum.length - 1].name.match(/[^\s-]+-?/g);
-      return `${first} ${last[last.length - 1]}`;
+      return `${first}<br/>${last[last.length - 1]}`;
     },
     colorsHex: function () {
       return this.sortedColors.map(c => c.hex());
