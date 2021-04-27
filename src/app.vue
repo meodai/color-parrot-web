@@ -269,7 +269,7 @@ input {
 }
 
 .palette__title {
-  font-size: 3rem;
+  font-size: 5rem;
   position: fixed;
   top: var(--s-gutter);
   left: var(--s-gutter);
