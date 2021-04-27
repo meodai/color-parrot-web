@@ -2,7 +2,7 @@
 <template>
   <main class="app" v-bind:class="{'is-ready': isReady}">
     <h1 class="palette__title">{{paletteName}}</h1>
-
+    <span aria-hidden class="palette__title palette__title--placeholder">{{paletteName}}</span>
     <aside aria-label="options" class="pannel">
       <!--label class="pannel__setting pannel__setting--inline">
         <input type="checkbox" v-model="show" />
@@ -255,7 +255,6 @@ input {
 }
 
 .swatches {
-  max-width: 40rem;
   display: flex;
   flex-wrap: wrap;
   margin: 0 calc(var(--s-gutter) - 1rem) var(--s-gutter);
@@ -273,10 +272,23 @@ input {
   position: fixed;
   top: var(--s-gutter);
   left: var(--s-gutter);
+  font-weight: 900;
+  padding-right: calc(12rem + 2rem);
+  line-height: 1;
+
+  &--placeholder {
+    opacity: 0;
+    display: block;
+    position: relative;
+    margin-top: 0;
+    margin-left: 0;
+    padding-bottom: .75em;
+    padding-right: 2rem;
+  }
 }
 
 .app {
-  padding-top: calc(3rem + var(--s-gutter) * 2);
+  //padding-top: calc(3rem + var(--s-gutter) * 2);
 }
 
 
