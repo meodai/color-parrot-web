@@ -32,11 +32,14 @@
 
   .color-list__item {
     color: var(--color);
+    & + & {
+      margin-top: 3em;
+    }
   }
   .color-list__title {
     display: block;
-    font-weight: 900;
-    font-size: 5rem;
+    font-weight: 800;
+    font-size: 3rem;
     line-height: 1;
   }
   .color-list__value {
