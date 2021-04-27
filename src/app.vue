@@ -56,6 +56,8 @@
         v-bind:isVisible="show"
       ></colorswatch>
     </section>
+    <colorlist v-bind:colors="colorNames">
+    </colorlist>
     <color3d v-bind:colors="colors">
     </color3d>
     <colorgradient v-bind:colors="sortedColors">
@@ -69,6 +71,7 @@ import Vue from "vue";
 import colorswatch from './components/color-swatch';
 import color3d from './components/color-3d';
 import colorgradient from './components/color-gradient';
+import colorlist from './components/color-list';
 
 const sorts = {
   'magic': colors => colors.sort((a, b) => (b.luminance() - a.luminance()) - (b.hcl()[0] - a.hcl()[0])),
@@ -79,7 +82,8 @@ export default Vue.extend({
   components: {
     colorswatch,
     color3d,
-    colorgradient
+    colorgradient,
+    colorlist
   },
   data() {
     return {

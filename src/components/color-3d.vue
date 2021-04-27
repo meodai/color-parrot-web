@@ -65,6 +65,7 @@
           color: '#fff',
         });
 
+        /*
         new Zdog.Shape({
           addTo: this.illo,
           path: [
@@ -74,6 +75,7 @@
           stroke: stroke,
           color: '#fff',
         });
+        */
 
         new Zdog.Shape({
           addTo: this.illo,
@@ -115,6 +117,7 @@
           color: '#fff',
         });
 
+        /*
         new Zdog.Shape({
           addTo: this.illo,
           path: [
@@ -124,6 +127,8 @@
           stroke: stroke,
           color: '#fff',
         });
+        */
+
 
         new Zdog.Shape({
           addTo: this.illo,
@@ -135,6 +140,7 @@
           color: '#fff',
         });
 
+        /*
         new Zdog.Shape({
           addTo: this.illo,
           path: [
@@ -144,6 +150,7 @@
           stroke: stroke,
           color: '#fff',
         });
+        */
 
         new Zdog.Shape({
           addTo: this.illo,
@@ -267,11 +274,12 @@
       //  this.addLabels();
 
       this.illo.updateRenderGraph();
-      this.illo.rotate.x -= .1;
+      this.illo.rotate.x -= .5;
+      this.illo.rotate.y = .785;
 
       const animate = () => {
         // rotate illo each frame
-        this.illo.rotate.y += 0.001;
+        //this.illo.rotate.y += 0.001;
 
         this.labels.forEach(label => {
           label.rotate.y = -this.illo.rotate.y;
