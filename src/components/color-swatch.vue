@@ -6,8 +6,12 @@
       <div class="colorswatch__shade" v-bind:style="{backgroundColor: color.hex()}"></div>
     </div>
     <header class="colorswatch__label">
-      <h1 class="colorswatch__row1">{{colorValue}}</h1>
-      <h2 class="colorswatch__row2">{{name}}</h2>
+      <h1 class="colorswatch__row1">
+        <span>{{colorValue}}</span>
+      </h1>
+      <h2 class="colorswatch__row2">
+        <span>{{name}}</span>
+      </h2>
     </header>
   </article>
 </template>
@@ -71,25 +75,26 @@
     color: #212121;
     transform-origin: 50% 0;
     box-shadow: 0 0 0 1px rgba(#000,.05);
+
+    span  {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   &__row1 {
     font-weight: 700;
     font-size: 1.1em;
+    height: 1.2em;
   }
 
   &__row2 {
     font-size: .8em;
     font-weight: 300;
-  }
-
-  &__row1,
-  &__row2 {
-    transform-origin: 50% 100%;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    height: calc(.8em * 1.6);
   }
 }
 
@@ -107,9 +112,12 @@
   }
   &__row1,
   &__row2 {
-    opacity: 0;
-    transform: scaleY(0);
-    transition: calc(var(--anim-appear-duration) * 0.1) opacity linear, calc(var(--anim-appear-duration) * 0.2) transform cubic-bezier(.7,.3,0,1);
+    span {
+      //opacity: 0;
+      height: 0;
+      transform: translateY(120%);
+      transition: calc(var(--anim-appear-duration) * 0.1) opacity linear, calc(var(--anim-appear-duration) * 0.2) height cubic-bezier(.7,.3,0,1), calc(var(--anim-appear-duration) * 0.2) transform cubic-bezier(.7,.3,0,1);
+    }
   }
   &__swatch {
     transform: translateY(150%);
@@ -148,13 +156,24 @@
     }
     &__row1,
     &__row2 {
-      opacity: 1;
-      transform: scaleY(1);
-      transition: calc(var(--anim-appear-duration) * .1) opacity linear, calc(var(--anim-appear-duration) * .2) transform cubic-bezier(.7,.3,0,1);
-      transition-delay: calc(var(--anim-appear-duration) * .4);
+      span {
+        opacity: 1;
+        height: 100%;
+        transform: translateY(0%);
+        transition: calc(var(--anim-appear-duration) * .05) opacity linear,
+                    calc(var(--anim-appear-duration) * .25) height cubic-bezier(.8,.3,.25,1),
+                    calc(var(--anim-appear-duration) * .25) transform cubic-bezier(.8,.3,.25,1);
+
+        transition-delay: calc(var(--anim-appear-duration) * .1),
+                          calc(var(--anim-appear-duration) * .1);
+        transform-origin: 0 0;
+      }
     }
     &__row2 {
-      transition-delay: calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .45);
+      span {
+        transition-delay: calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .15),
+                          calc(var(--anim-appear-delay, 0ms) + var(--anim-appear-duration) * .15);
+      }
     }
     &__swatch {
       transform: translateY(0);
