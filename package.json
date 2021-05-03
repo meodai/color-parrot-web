@@ -48,6 +48,8 @@
     "chroma-js": "^2.1.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2",
     "zdog": "^1.1.2",
     "zfont": "^1.2.8"
   },

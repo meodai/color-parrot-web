@@ -2,12 +2,12 @@
   <ol class="color-list">
     <li
       class="color-list__item"
-      v-for="color in colors"
+      v-for="(color,i) in colors"
       v-bind:key="color.hex"
       v-bind:style="{'--color': color.requestedHex}"
     >
       <strong class="color-list__title">{{color.name}}</strong>
-      <span class="color-list__value">{{color.requestedHex}}</span>
+      <span class="color-list__value">{{cvalues[i]}}</span>
     </li>
   </ol>
 </template>
@@ -16,9 +16,8 @@
   import Vue from 'vue';
 
   export default Vue.extend({
-    props: ['colors'],
-    methods: {
-    }
+    props: ['colors', 'cvalues'],
+    methods: {}
   });
 </script>
 
@@ -26,14 +25,14 @@
   .color-list {
     position: relative;
     z-index: 4;
-    padding: var(--s-gutter);
+    padding: var(--s-gutter) var(--s-gutter) calc(var(--s-gutter) * 3);
     background: #212121;
   }
 
   .color-list__item {
     color: var(--color);
     & + & {
-      margin-top: 3em;
+      margin-top: 2.2em;
     }
   }
   .color-list__title {
