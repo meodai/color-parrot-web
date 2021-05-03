@@ -104,6 +104,7 @@ export default Vue.extend({
   transform: translate(-50%, -50%);
 
   @media (orientation: portrait) {
+    top: 50vh;
     width: 40%;
   }
 }
@@ -115,7 +116,7 @@ export default Vue.extend({
 
   @media (orientation: portrait) {
     left: 50%;
-    top: 30%;
+    top: 30vh;
     transition: 1000ms top cubic-bezier(.3,.7,0,1);
     transition-delay: 900ms;
   }
