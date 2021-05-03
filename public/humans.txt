@@ -18,8 +18,6 @@
 # THANKS
 
   David Darx -- Design Reviews -- @daviddarx
-  Florian Schulz -- Design Reviews -- @getflourish
-  Philipp Dornbierer -- Illustrator -- @yehteh
 
 # TECHNOLOGY COLOPHON
 
