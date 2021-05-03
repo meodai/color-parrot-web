@@ -51,6 +51,7 @@ legend {
 
 // input hell
 input, select {
+  font-size: 0.6rem;
   display: block;
   box-sizing: border-box;
   touch-action: manipulation;
