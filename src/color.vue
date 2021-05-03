@@ -13,6 +13,7 @@
       <colorstory
         v-bind:name="currentColor.name"
         v-bind:isVisible="isReady && show"
+        v-bind:color="color"
       ></colorstory>
     </div>
   </div>
@@ -79,12 +80,12 @@ export default Vue.extend({
 .color-detail__swatch,
 .color-detail__story {
   position: absolute;
-  width: 40vw;
 }
 
 .color-detail__swatch {
   z-index: 2;
   opacity: 1;
+  width: 20%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

@@ -3,6 +3,7 @@
     class="color-story"
     v-bind:aria-label="name"
     v-bind:class="{'color-story--visible': isVisible}"
+    v-bind:style="{'--currentColor': color}"
   >
     <article
       v-for="article in entries"
@@ -88,7 +89,7 @@
   }
 
   export default Vue.extend({
-    props: ['name', 'isVisible'],
+    props: ['name', 'color', 'isVisible'],
     data: function () {
       return {
         responses: [],
@@ -192,7 +193,7 @@
     max-width: 50%;
     float: left;
     margin-right: 0em;
-    margin-bottom: 1.2em;
+    margin-bottom: 2em;
     transform: translateX(calc(var(--gutter) * -1 - 1px));
   }
 
@@ -206,6 +207,9 @@
     display: block;
     text-transform: capitalize;
     margin-top: 1em;
+    color: #000;
+    text-decoration-thickness: .4em;
+    text-decoration-color: var(--currentColor);
   }
 
   ul {
