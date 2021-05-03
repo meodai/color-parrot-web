@@ -93,7 +93,7 @@
 import chroma from 'chroma-js';
 import Vue from "vue";
 import colorswatch from './components/color-swatch';
-import color3d from './components/color-3d';
+//import color3d from './components/color-3d';
 import colorgradient from './components/color-gradient';
 import colorlist from './components/color-list';
 import colorcircle from './components/color-circle';
@@ -106,7 +106,7 @@ const sorts = {
 export default Vue.extend({
   components: {
     colorswatch,
-    color3d,
+    //color3d,
     colorgradient,
     colorlist,
     colorcircle,
