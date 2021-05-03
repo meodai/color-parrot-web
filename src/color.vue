@@ -97,6 +97,9 @@ export default Vue.extend({
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  @media (orientation: portrait) {
+    overflow: auto;
+  }
 }
 
 .color-detail__swatch,
@@ -111,12 +114,23 @@ export default Vue.extend({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (orientation: portrait) {
+    width: 40%;
+  }
 }
 
 .color-detail--visible .color-detail__swatch {
   left: 30%;
   transition: 1000ms left cubic-bezier(.3,.7,0,1);
   transition-delay: 900ms;
+
+  @media (orientation: portrait) {
+    left: 50%;
+    top: 30%;
+    transition: 1000ms top cubic-bezier(.3,.7,0,1);
+    transition-delay: 900ms;
+  }
 }
 
 .color-detail__story {
@@ -135,8 +149,14 @@ export default Vue.extend({
   transform: translateX(110%);
   transition: 600ms transform cubic-bezier(.3,.7,0,1);
   transition-delay: 800ms;
-}
 
+  @media (orientation: portrait) {
+    position: relative;
+    width: 100%;
+    top: 62vh;
+    transform: translateY(110%);
+  }
+}
 .color-detail--visible .color-detail__story {
   transform: translateX(0%);
 }
