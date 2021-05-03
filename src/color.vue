@@ -102,7 +102,7 @@ export default Vue.extend({
 
   //--s-label-height: calc((.6rem + 5vmin) * 1.45);
   //height: calc(var(--s-label-height) + 45vw);
-  overflow: scroll;
+  overflow-y: scroll;
   background: #fff;
   color: #001;
 
@@ -117,6 +117,23 @@ export default Vue.extend({
 
 .color-detail--visible .color-detail__story {
   transform: translateX(0%);
+}
+
+.color-story__article {
+  > *:not(img) {
+    opacity: 0;
+    transform: translateX(50%);
+    transition: 600ms transform cubic-bezier(.3,.7,0,1),
+                200ms opacity linear;
+    transition-delay: 870ms, 970ms;
+  }
+}
+
+.color-detail--visible .color-story__article {
+  > *:not(img) {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 
 </style>
