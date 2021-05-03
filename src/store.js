@@ -17,6 +17,41 @@ export default new Vuex.Store({
       distance: 0
     },
     isReady: false,
+    colorMode: 'hex',
+    colorModes: {
+      hex: {
+        label: 'hex',
+        fn: color => color.hex(),
+      },
+      rgb: {
+        label: 'RGB',
+        fn: color => color.rgb().reduce((r,v,i) => `${r} ${v}`,''),
+      },
+      gl: {
+        label: 'RGB Percent',
+        fn: color => {
+          let colorValue = color.gl();
+          colorValue.pop()
+          return colorValue.reduce((r,v,i) => `${r} ${Math.round(v*100)}%`,'');
+        },
+      },
+      hsl: {
+        label: 'HSL',
+        fn: color => {
+          let colorValue = color.hsl();
+          colorValue.pop()
+          return colorValue.reduce((r,v,i) => `${r} ${i ? Math.floor(v * 100) + '%' : Math.floor(v) + '°'}`,'');
+        }
+      },
+      cmyk: {
+        label: 'CMYK',
+        fn: color => color.cmyk().reduce((r,v,i) => `${r} ${Math.floor(v * 100)}°`,''),
+      },
+      lab: {
+        label: 'LAB',
+        fn: color => color.lab().reduce((r,v,i) => `${r} ${Math.floor(v)}`,''),
+      },
+    }
   },
   getters: {
   },

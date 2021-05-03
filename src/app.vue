@@ -49,4 +49,38 @@ legend {
   line-height: 1.2;
 }
 
+// input hell
+input, select {
+  display: block;
+  box-sizing: border-box;
+  touch-action: manipulation;
+  border: none;
+  width: auto;
+}
+
+select {
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border: 0;
+  box-shadow: 0 1px 0 0 #fff;
+  border-radius: 0;
+  padding: 0.25rem 1rem 0.25rem 0rem;
+  background-color: transparent;
+  background-size: 1.25em 1.25em;
+  background-image: conic-gradient(#fff 5%, transparent 0 95%, #fff 0);
+  background-repeat: no-repeat;
+  background-position: right 0% top 120%;
+
+  option {
+    color: #000;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: transparent;
+  }
+}
+
 </style>

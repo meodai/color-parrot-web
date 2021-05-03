@@ -31,10 +31,12 @@
     props: {
       name: String,
       color: Object,
-      colorValue: String,
       isVisible: Boolean,
     },
     computed: {
+      colorValue: function () {
+        return this.$store.state.colorModes[this.$store.state.colorMode].fn(this.color);
+      },
       lum: function () {
         return this.color.luminance();
       },

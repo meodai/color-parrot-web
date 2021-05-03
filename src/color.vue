@@ -4,7 +4,6 @@
     <div class="color-detail__swatch">
       <colorswatch
         v-bind:color="color"
-        v-bind:colorValue="currentColor.requestedHex"
         v-bind:name="currentColor.name"
         v-bind:isVisible="isReady && show"
       ></colorswatch>
@@ -16,6 +15,18 @@
         v-bind:color="color"
       ></colorstory>
     </div>
+    <form
+      action="#"
+      class="color-detail__mode"
+    >
+      <select v-model="$store.state.colorMode">
+        <option
+          v-for="(sort, mode) in $store.state.colorModes"
+          v-bind:key="mode"
+          v-bind:value="mode"
+        >{{sort.label}}</option>
+      </select>
+    </form>
   </div>
 </template>
 
@@ -134,6 +145,22 @@ export default Vue.extend({
     transform: translateX(0%);
     opacity: 1;
   }
+}
+
+.color-detail__mode {
+  opacity: 0;
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  transform: translateY(6rem);
+  transition: 600ms transform cubic-bezier(.3,.7,0,1),
+              200ms opacity linear;
+  transition-delay: 2000ms, 2000ms;
+}
+
+.color-detail--visible .color-detail__mode {
+  opacity: 1;
+  transform: translateY(0rem);
 }
 
 </style>
