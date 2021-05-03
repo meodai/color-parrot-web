@@ -94,7 +94,7 @@ export default Vue.extend({
 .color-detail--visible .color-detail__swatch {
   left: 30%;
   transition: 1000ms left cubic-bezier(.3,.7,0,1);
-  transition-delay: 800ms;
+  transition-delay: 900ms;
 }
 
 .color-detail__story {

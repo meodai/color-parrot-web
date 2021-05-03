@@ -204,7 +204,7 @@
   }
 
   a {
-    display: block;
+    display: inline-block;
     text-transform: capitalize;
     margin-top: 1em;
     color: #000;
@@ -218,6 +218,10 @@
     li {
       margin-top: 1em ;
     }
+  }
+
+  ::selection {
+    background: var(--currentColor);
   }
 
 }
