@@ -25,6 +25,24 @@
         class="color-story__link"
       >read more</a>
     </article>
+    <aside
+      v-if="images.length"
+      v-bind:aria-label="'Images for ' + name"
+      class="color-story__media"
+    >
+
+      <figure
+        class="color-story__imagecontainer"
+        v-for="(set,i) in images"
+        v-bind:key="i"
+      >
+        <img
+          v-bind:srcset="srcSet(set)"
+          v-bind:src="set[0].src"
+          alt="Elva dressed as a fairy"
+        />
+      </figure>
+    </aside>
   </section>
 </template>
 
@@ -93,9 +111,26 @@
     data: function () {
       return {
         responses: [],
+        defintions: [],
+        media: [],
       };
     },
     computed: {
+      images: function () {
+        if (this.media.length) {
+          const imageSets = [];
+          this.media.forEach(mediaGroup => {
+            mediaGroup.items.forEach(img => {
+              console.log(img)
+              if(img.type == "image") {
+                imageSets.push(img.srcset);
+              }
+            });
+          });
+          return imageSets;
+        }
+        return [];
+      },
       entries: function () {
         return this.responses
           .filter((v,i,a) =>
@@ -131,6 +166,9 @@
       }
     },
     methods: {
+      srcSet: function(arr) {
+        return arr.reduce((acc, cur) => (acc ? `${acc}, `: '') + cur.src + ' ' + cur.scale, null);
+      },
       lookup: function (query) {
         const url = new URL(
           `https://en.wikipedia.org` +
@@ -159,9 +197,49 @@
           return data;
         }).catch(err => console.log(err));
       },
+      findmedia: function (query) {
+        const url = new URL(
+          `https://en.wikipedia.org` +
+          `/api/rest_v1/page/media-list/${encodeURIComponent(query.replace(/ /g, '_'))}?redirect=true`
+        );
+
+        fetch(url).then(res => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          }
+          return res.json()
+        })
+        .then(data => {
+          this.media.push( Object.assign({}, { query: query }, data) );
+          return data;
+        }).catch(err => console.log(err));
+      },
+      define (query) {
+        const url = new URL(
+          `https://api.dictionaryapi.dev` +
+          `/api/v2/entries/en_US/${encodeURIComponent(query)}`
+        );
+
+        fetch(url).then(res => {
+          if (!res.ok) {
+            throw Error(res.statusText);
+          }
+          return res.json()
+        })
+        .then(data => {
+          this.defintions.push( Object.assign({}, { query: query }, data) );
+          return data;
+        }).catch(err => console.log(err));
+      },
       getInfo () {
         this.responses = [];
         this.nameVariants.forEach(this.lookup);
+
+        this.media = [];
+        this.nameVariants.forEach(this.findmedia);
+
+        //this.defintions = [];
+        //this.nameVariants.filter(d => !d.includes('(color)')).forEach(this.define);
       },
     },
     mounted () {
@@ -223,6 +301,26 @@
   ::selection {
     background: var(--currentColor);
   }
-
 }
+
+.color-story__media {
+  columns: 6 5rem;
+  column-gap: 1rem;
+  margin-bottom: 2rem;
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+
+.color-story__imagecontainer {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+
 </style>
+
+// https://en.wikipedia.org/api/rest_v1/page/media-list/pink
