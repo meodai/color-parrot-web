@@ -30,18 +30,22 @@
       v-bind:aria-label="'Images for ' + name"
       class="color-story__media"
     >
-
-      <figure
-        class="color-story__imagecontainer"
-        v-for="(set,i) in images"
-        v-bind:key="i"
-      >
-        <img
-          v-bind:srcset="srcSet(set)"
-          v-bind:src="set && set[0].src"
-          v-bind:alt="'Image for ' + name"
-        />
-      </figure>
+      <div class="color-story__article">
+        <h2 v-html="'Images for ' + name"></h2>
+      </div>
+      <div class="color-story__images">
+        <figure
+          class="color-story__imagecontainer"
+          v-for="(set,i) in images"
+          v-bind:key="i"
+        >
+          <img
+            v-bind:srcset="srcSet(set)"
+            v-bind:src="set && set[0].src"
+            v-bind:alt="'Image for ' + name"
+          />
+        </figure>
+      </div>
     </aside>
   </section>
 </template>
@@ -303,6 +307,12 @@
 }
 
 .color-story__media {
+  .color-story__article {
+    padding-bottom: 0;
+  }
+}
+
+.color-story__images {
   columns: 3 5rem;
   column-gap: 1rem;
   margin-bottom: 2rem;
@@ -312,7 +322,6 @@
     width: 100%;
   }
 }
-
 
 .color-story__imagecontainer {
   width: 100%;
