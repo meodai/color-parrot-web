@@ -160,8 +160,6 @@
 
       @for $i from 1 through 5 {
         &:nth-child(#{$i}) {
-          transition-delay: $i * 40ms, $i * 45ms;
-
           transition-delay: $i * 20ms, $i * 30ms;
         }
       }
@@ -273,6 +271,7 @@
     height: 1.2em;
     line-height: 1.2;
     margin-top: 0.45em;
+    text-transform: uppercase;
 
     overflow: hidden;
     white-space: nowrap;
