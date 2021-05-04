@@ -14,7 +14,7 @@
         v-bind:color="color"
       ></colorstory>
     </div>
-    <form
+    <!--form
       action="#"
       class="color-detail__mode"
     >
@@ -25,7 +25,7 @@
           v-bind:value="mode"
         >{{sort.label}}</option>
       </select>
-    </form>
+    </form-->
   </div>
 </template>
 
@@ -85,6 +85,7 @@ export default Vue.extend({
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+
   @media (orientation: portrait) {
     overflow: auto;
   }

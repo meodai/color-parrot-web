@@ -15,12 +15,32 @@
       <i class="colorswatch__shade"></i>
       <i class="colorswatch__shade"></i>
     </i>
-    <header class="colorswatch__label">
-      <div class="colorswatch__info">
+    <aside
+      v-bind:aria-label="name + ' represented in color other models'"
+      class="colorswatch__formats"
+      v-bind:class="{'colorswatch__formats--open': showFormats}"
+    >
+      <ul>
+        <template
+          v-for="(sort, mode) in $store.state.colorModes"
+        >
+          <li
+            v-if="mode !== $store.state.colorMode"
+            v-bind:key="mode"
+            v-on:click="($store.state.colorMode = mode) && toggleFormats()"
+          >
+            <span>{{sort.label}}</span>
+            <strong>{{sort.fn(color)}}</strong>
+          </li>
+        </template>
+      </ul>
+    </aside>
+    <div class="colorswatch__label">
+      <header class="colorswatch__info" v-on:click="toggleFormats">
         <h2 class="colorswatch__row1">{{colorValue}}</h2>
         <h1 class="colorswatch__row2">{{name}}</h1>
-      </div>
-    </header>
+      </header>
+    </div>
   </article>
 </template>
 
@@ -32,6 +52,16 @@
       name: String,
       color: Object,
       isVisible: Boolean,
+    },
+    data: function () {
+      return {
+        showFormats: false,
+      }
+    },
+    methods: {
+      toggleFormats: function () {
+        this.showFormats = !this.showFormats;
+      }
     },
     computed: {
       colorValue: function () {
@@ -61,16 +91,24 @@
 <style lang="scss">
 
 .colorswatch {
+  position: relative;
   --s-label-height: 1.46em;
 
   font-size: calc(.6rem + 5vmin);
+  font-size: 4.1vw;
+
+  @media (orientation: portrait) {
+    font-size: calc(.6rem + 5vmin);
+    font-size: 8vw;
+  }
+
   cursor: pointer;
   overflow: hidden;
 
   &__swatch {
     display: block;
     position: relative;
-    padding-top: calc(100% + 1px);
+    padding-top: calc(100% + 2px);
     z-index: 1;
     overflow: hidden;
   }
@@ -91,6 +129,89 @@
     }
   }
 
+  &__formats {
+    --toggle-speed: 400ms;
+    position: absolute;
+    padding: 0.45em .3em var(--s-label-height);
+    background: #fff;
+    color: #212121;
+    left: 0; bottom: 1px; right: 0;
+    top: 80%;
+    transition: var(--toggle-speed) top cubic-bezier(.7,.3,0,1);
+
+    li {
+      opacity: 0;
+      transition: 200ms opacity linear, 200ms transform cubic-bezier(.3,.7,0,1);
+      transform: translateY(-200%);
+      transform-origin: 0 100%;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          transition-delay: $i * 40ms, $i * 45ms;
+        }
+      }
+    }
+
+    &--open {
+      top: 1em;
+      li {
+        opacity: 1;
+        transform: translateY(0%);
+        transition: 200ms opacity linear, 240ms transform cubic-bezier(.3,.7,0,1);
+
+        @for $i from 1 through 5 {
+          &:nth-child(#{$i}) {
+            transition-delay: 360ms - $i * 55ms, 350ms - $i * 50ms;
+          }
+        }
+
+      }
+    }
+
+    overflow: hidden;
+    z-index: 1;
+
+    ul {
+      position: absolute;
+      bottom: var(--s-label-height);
+      left: 0.35em;
+      right: 0.35em;
+    }
+
+
+    li + li {
+      margin-top: .2em;
+    }
+
+    span, strong {
+      display: block;
+    }
+    span {
+      font-size: .2em;
+    }
+    strong {
+      font-weight: 700;
+      font-size: 0.27em;
+      line-height: 1;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: .4rem solid #fff;
+      pointer-events: none;
+    }
+
+  }
+
   &__label {
     position: relative;
     height: var(--s-label-height);
@@ -104,6 +225,7 @@
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background: #fff;
     padding: 0 .3em;
     color: #212121;
