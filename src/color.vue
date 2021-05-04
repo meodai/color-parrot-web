@@ -40,6 +40,24 @@ export default Vue.extend({
     colorswatch,
     colorstory,
   },
+  metaInfo() {
+    return {
+      title: this.$store.state.currentColor.name + ': ' + this.$store.state.currentColor.requestedHex,
+      meta: [
+        { property: 'og:type', content: 'website'},
+        { property: 'og:title', content: this.$store.state.currentColor.name + ': ' + this.$store.state.currentColor.requestedHex},
+        { property: 'og:description', content: 'All you ever wanted to know about the color ' + this.$store.state.currentColor.name + ' (' + this.$store.state.currentColor.requestedHex + ')'},
+        { property: 'og:url', content: `https://parrot.color.pizza/color/${this.$store.state.currentColor.requestedHex.replace('#','')}`},
+        { property: 'og:image', content: `https://dummyimage.com/1200x627/${this.$store.state.currentColor.requestedHex.replace('#','')}/fff.png&text=${encodeURI(this.$store.state.currentColor.name)}`},
+
+        { property: 'twitter:card', content: 'summary_large_image'},
+        { property: 'twitter:title', content: this.$store.state.currentColor.name + ': ' + this.$store.state.currentColor.requestedHex},
+        { property: 'twitter:description', content: 'All you ever wanted to know about the color ' + this.$store.state.currentColor.name + ' (' + this.$store.state.currentColor.requestedHex + ')'},
+        { property: 'twitter:url', content: `https://parrot.color.pizza/color/${this.$store.state.currentColor.requestedHex.replace('#','')}`},        { property: 'og:image', content: `https://www.colorbook.io/imagecreator.php?hex=${this.$store.state.currentColor.requestedHex.replace('#','')}&width=1200&height=627`},
+        { property: 'twitter:image', content: `https://dummyimage.com/1200x627/${this.$store.state.currentColor.requestedHex.replace('#','')}/fff.png&text=${encodeURI(this.$store.state.currentColor.name)}`},
+      ],
+    }
+  },
   data: function () {
     return {
       show: false,
