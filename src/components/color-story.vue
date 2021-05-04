@@ -38,8 +38,8 @@
       >
         <img
           v-bind:srcset="srcSet(set)"
-          v-bind:src="set[0].src"
-          alt="Elva dressed as a fairy"
+          v-bind:src="set && set[0].src"
+          v-bind:alt="'Image for ' + name"
         />
       </figure>
     </aside>
@@ -121,7 +121,6 @@
           const imageSets = [];
           this.media.forEach(mediaGroup => {
             mediaGroup.items.forEach(img => {
-              console.log(img)
               if(img.type == "image") {
                 imageSets.push(img.srcset);
               }
@@ -167,7 +166,7 @@
     },
     methods: {
       srcSet: function(arr) {
-        return arr.reduce((acc, cur) => (acc ? `${acc}, `: '') + cur.src + ' ' + cur.scale, null);
+        return arr ? arr.reduce((acc, cur) => (acc ? `${acc}, `: '') + cur.src + ' ' + cur.scale, null) : '';
       },
       lookup: function (query) {
         const url = new URL(
