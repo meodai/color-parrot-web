@@ -87,7 +87,7 @@ export default Vue.extend({
   overflow: hidden;
 
   @media (orientation: portrait) {
-    overflow: auto;
+    overflow: visible;
   }
 }
 
@@ -145,6 +145,7 @@ export default Vue.extend({
     width: 100%;
     top: 62vh;
     transform: translateY(110%);
+    overflow-y: visible;
   }
 }
 .color-detail--visible .color-detail__story {
