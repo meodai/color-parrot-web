@@ -10,31 +10,33 @@
       '--c-shade1': shade1,
     }"
   >
-    <i aria-hidden class="colorswatch__swatch">
-      <i class="colorswatch__shade"></i>
-      <i class="colorswatch__shade"></i>
-      <i class="colorswatch__shade"></i>
-    </i>
-    <aside
-      v-bind:aria-label="name + ' represented in color other models'"
-      class="colorswatch__formats"
-      v-bind:class="{'colorswatch__formats--open': showFormats}"
-    >
-      <ul>
-        <template
-          v-for="(sort, mode) in $store.state.colorModes"
-        >
-          <li
-            v-if="mode !== $store.state.colorMode"
-            v-bind:key="mode"
-            v-on:click="($store.state.colorMode = mode) && toggleFormats()"
+    <div class="colorswatch__upper">
+      <i aria-hidden class="colorswatch__swatch">
+        <i class="colorswatch__shade"></i>
+        <i class="colorswatch__shade"></i>
+        <i class="colorswatch__shade"></i>
+      </i>
+      <aside
+        v-bind:aria-label="name + ' represented in color other models'"
+        class="colorswatch__formats"
+        v-bind:class="{'colorswatch__formats--open': showFormats}"
+      >
+        <ul>
+          <template
+            v-for="(sort, mode) in $store.state.colorModes"
           >
-            <span>{{sort.label}}</span>
-            <strong>{{sort.fn(color)}}</strong>
-          </li>
-        </template>
-      </ul>
-    </aside>
+            <li
+              v-if="mode !== $store.state.colorMode"
+              v-bind:key="mode"
+              v-on:click="($store.state.colorMode = mode) && toggleFormats()"
+            >
+              <span>{{sort.label}}</span>
+              <strong>{{sort.fn(color)}}</strong>
+            </li>
+          </template>
+        </ul>
+      </aside>
+    </div>
     <div class="colorswatch__label">
       <header class="colorswatch__info" v-on:click="toggleFormats">
         <h2 class="colorswatch__row1">{{colorValue}}</h2>
@@ -105,17 +107,26 @@
   cursor: pointer;
   overflow: hidden;
 
+  .colorswatch__upper {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+  }
+
   &__swatch {
     display: block;
-    position: relative;
-    padding-top: calc(100% + 2px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1;
     overflow: hidden;
   }
 
   &__shade {
     position: absolute;
-    top: 0; right: 0; bottom: -1px; left: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
     transform-origin: 50% 100%;
 
     &:nth-child(1) {
@@ -136,24 +147,29 @@
     background: #fff;
     color: #212121;
     left: 0; bottom: 1px; right: 0;
-    top: 80%;
+    top: 103%;
     transition: var(--toggle-speed) top cubic-bezier(.7,.3,0,1);
+    perspective: 600;
 
     li {
       opacity: 0;
-      transition: 200ms opacity linear, 200ms transform cubic-bezier(.3,.7,0,1);
+      transition: 200ms opacity linear, 230ms transform cubic-bezier(.3,.7,0,1);
+
       transform: translateY(-200%);
-      transform-origin: 0 100%;
+      transform-origin: 50% 100% 0;
 
       @for $i from 1 through 5 {
         &:nth-child(#{$i}) {
           transition-delay: $i * 40ms, $i * 45ms;
+
+          transition-delay: $i * 20ms, $i * 30ms;
         }
       }
     }
 
     &--open {
-      top: 1em;
+      top: 1.07em;
+
       li {
         opacity: 1;
         transform: translateY(0%);
@@ -173,19 +189,19 @@
 
     ul {
       position: absolute;
-      bottom: var(--s-label-height);
+      bottom: 1px;
       left: 0.35em;
       right: 0.35em;
     }
 
-
     li + li {
-      margin-top: .2em;
+      margin-top: .20em;
     }
 
     span, strong {
       display: block;
     }
+
     span {
       font-size: .2em;
     }
@@ -207,6 +223,7 @@
       bottom: 0;
       left: 0;
       border: .4rem solid #fff;
+      border-bottom: none;
       pointer-events: none;
     }
 
@@ -217,12 +234,11 @@
     height: var(--s-label-height);
     z-index: 2;
     margin-top: -1px;
-    background: #212121;
   }
 
   &__info {
     position: absolute;
-    top: 0;
+    top: -1px;
     left: 0;
     right: 0;
     bottom: 0;
