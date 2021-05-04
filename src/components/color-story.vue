@@ -303,7 +303,7 @@
 }
 
 .color-story__media {
-  columns: 6 5rem;
+  columns: 3 5rem;
   column-gap: 1rem;
   margin-bottom: 2rem;
 
