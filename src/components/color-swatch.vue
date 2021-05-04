@@ -152,6 +152,7 @@
     perspective: 600;
 
     li {
+      position: relative;
       opacity: 0;
       transition: 200ms opacity linear, 230ms transform cubic-bezier(.3,.7,0,1);
 
@@ -161,6 +162,40 @@
       @for $i from 1 through 5 {
         &:nth-child(#{$i}) {
           transition-delay: $i * 20ms, $i * 30ms;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        content: '';
+        left: 0;
+        top: 8%;
+        bottom: 0;
+        width: 4px;
+        background: #000;
+        transform: scaleX(0);
+        transform-origin: 0 100%;
+        transition: 100ms transform cubic-bezier(.7,.3,0,1);
+      }
+      span, strong {
+        display: block
+      }
+      span {
+        transition: 200ms transform cubic-bezier(.7,.3,0,1);
+      }
+
+      strong {
+        transition: 300ms transform cubic-bezier(.7,.3,0,1);
+        transition-delay: 30ms;
+      }
+
+      &:hover {
+        &::before {
+          transform: scaleX(1);
+          transition: 300ms transform cubic-bezier(.7,.3,0,1) 150ms;
+        }
+        span, strong {
+          transform: translateX(9%);
         }
       }
     }
