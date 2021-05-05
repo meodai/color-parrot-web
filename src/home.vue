@@ -56,16 +56,39 @@
         To be able to measure what names are better then others, or that are just plain bad I collect the likes and the reactions
         to each individual color. So by using the bot you are actively contributing to an open-source project.
       </p>
-      <h3>Who pais for all that?</h3>
+      <h3>Who pays for all that?</h3>
       <p>I am so glad you asked. Hopefully you!</p>
-      <h4>Costs of running the bot:</h4>
-      <ol>
-        <li>Logo by Metafizzy: 800USD</li>
-        <li>External Developers: 3620.60USD</li>
-        <li>Color Name API Server: 22USD/month</li>
-        <li>color.pizza domain name 36.18USD/year</li>
-        <li>Cloudflare PRO plan: 20USD/month</li>
-      </ol>
+      <table>
+          <caption>Costs of running the bot (in USD)</caption>
+          <thead>
+              <tr>
+                  <th scope="col">Items</th>
+                  <th scope="col">Expenditure</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <th scope="row">Logo by Metafizzy</th>
+                  <td>800</td>
+              </tr>
+              <tr>
+                  <th scope="row">External Developers</th>
+                  <td>3,620.60</td>
+              </tr>
+              <tr>
+                  <th scope="row">Color Name API Server</th>
+                  <td>264.60/year</td>
+              </tr>
+              <tr>
+                  <th scope="row">color.pizza domain name</th>
+                  <td>36.16/year</td>
+              </tr>
+              <tr>
+                  <th scope="row">Cloudflare PRO Plan</th>
+                  <td>240/year</td>
+              </tr>
+          </tbody>
+      </table>
 
       <p>
         This is not accounting for my own work: Over the past 4 years I have addad an average of
@@ -133,7 +156,7 @@ export default Vue.extend({
 </script>
 <style lang="scss">
   .home {
-    max-width: 30rem;
+    max-width: 35rem;
     padding: var(--s-gutter);
     font-weight: 200;
     font-size: .75em;
@@ -146,16 +169,28 @@ export default Vue.extend({
       margin-bottom: 2rem;
     }
 
+    table {
+      width: 60%;
+    }
+
+    tr,td,caption{
+      text-align: left;
+    }
+
+    caption {
+      font-weight: 700;
+    }
 
     h1 {
       font-size: 6rem;
       font-weight: 900;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.01em;
       line-height: .9;
+      padding-right: 20rem;
     }
 
     h2 {
-      margin-top: 1em;
+      margin-top: 2.5em;
       font-weight: 600;
       font-size: 1.8rem;
       line-height: 1.1;
@@ -163,7 +198,7 @@ export default Vue.extend({
     }
 
     h3 {
-      margin-top: 1em;
+      margin-top: 1.5em;
       font-weight: 600;
       font-size: 1.4rem;
       line-height: 1.1;
