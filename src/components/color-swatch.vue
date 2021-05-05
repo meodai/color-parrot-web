@@ -104,7 +104,6 @@
     font-size: 8vw;
   }
 
-  cursor: pointer;
   overflow: hidden;
 
   .colorswatch__upper {
@@ -267,6 +266,7 @@
     height: var(--s-label-height);
     z-index: 2;
     margin-top: -1px;
+    cursor: n-resize;
   }
 
   &__info {
