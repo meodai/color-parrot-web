@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta'
 
 import App from './app.vue';
+import Home from './home.vue';
 import Color from './color.vue';
 import Colors from './colors.vue';
 import store from "./store";
@@ -11,9 +12,9 @@ Vue.use(VueMeta)
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Colors },
+  { path: '/', component: Home },
   { path: '/color/:color_id', component: Color },
-  { path: '/palette/:colors_id', component: Colors }
+  { path: '/:colors_id', component: Colors },
 ];
 
 const router = new VueRouter({

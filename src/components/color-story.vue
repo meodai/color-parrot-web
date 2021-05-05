@@ -253,7 +253,7 @@
 
 <style lang="scss">
 .color-story__article {
-  --gutter: 2rem;
+  --gutter: var(--s-gutter, 2rem);
 
   padding: var(--gutter);
 

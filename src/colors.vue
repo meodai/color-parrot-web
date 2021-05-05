@@ -244,7 +244,9 @@ export default Vue.extend({
     }
   },
   mounted () {
-    this.urlToColors();
+    //this.urlToColors();
+    console.log('test')
+    this.newRandomColors();
     this.fetchNames();
   },
 });
