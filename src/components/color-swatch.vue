@@ -96,12 +96,10 @@
   position: relative;
   --s-label-height: 1.46em;
 
-  font-size: calc(.6rem + 5vmin);
-  font-size: 4.1vw;
+  font-size: calc(var(--swatch-scale, 1) * 4.1vw);
 
   @media (orientation: portrait) {
-    font-size: calc(.6rem + 5vmin);
-    font-size: 8vw;
+    font-size: calc(var(--swatch-scale, 1) * 8vw);
   }
 
   overflow: hidden;

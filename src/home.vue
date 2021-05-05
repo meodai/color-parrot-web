@@ -1,5 +1,23 @@
 <template>
-  <section class="home">
+  <div class="home-outer">
+    <div class="deco">
+      <div class="deco__inner">
+        <a
+          href="#"
+          class="deco__swatch"
+          v-for="(color,i) in colors"
+          v-bind:key="i"
+          v-on:click.prevent="changeColor(i)"
+        >
+          <colorswatch
+            v-bind:color="color.color"
+            v-bind:name="colorsNamed[i].name"
+            v-bind:isVisible="color.ready"
+          ></colorswatch>
+        </a>
+      </div>
+    </div>
+    <section class="home">
     <div class="home__logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
         <path d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z" fill="#f69"/>
@@ -112,14 +130,18 @@
         <li>Bitccoin Address: 383gmyiQruH5z2JnbsukhSMDDmVJ3Bxogr</li>
       </ul>
     </article>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
+import chroma from 'chroma-js';
 import Vue from "vue";
+import colorswatch from './components/color-swatch';
 
 export default Vue.extend({
   components: {
+    colorswatch,
   },
   metaInfo() {
     return {
@@ -142,22 +164,102 @@ export default Vue.extend({
   },
   data: function () {
     return {
+      colors: [],
+      colorsNamed: [],
+      randomColorIndex: null,
+      timers: [],
     }
   },
   computed: {
 
   },
   methods: {
+    fillColors () {
+      const c1 = chroma.random();
+      const c2 = c1.set('hsl.h', '+180');
 
+      this.colors = chroma.scale([c1,c2])
+                    .mode('lch')
+                    .colors(30)
+                    .map(c => {return {
+                      color: chroma(c),
+                      ready: true,
+                    }})
+
+      this.colorsNamed = (new Array(30)).fill('').map(i => {
+        return {name: ''};
+      });
+    },
+    changeColor (index) {
+      console.log(index);
+      this.colors[index].ready = false;
+      const timer = setTimeout(() => {
+        this.colors[index].color = chroma.random();
+        this.colors[index].ready = true;
+      }, 1000);
+    },
+    fetchColors() {
+
+      const apiURL = new URL('https://api.color.pizza/v1/');
+
+      const params = {
+        values: this.colors.map(c => c.color.hex().replace('#', '')),
+        goodnamesonly: false,
+        noduplicates: true,
+      }
+
+      apiURL.search = new URLSearchParams(params).toString();
+
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+          this.colorsNamed = data.colors;
+        }).catch(error => {
+          throw new Error(`API ${error}`);
+        });
+    }
   },
-
-
+  created () {
+    this.fillColors();
+    this.fetchColors();
+    //setInterval(this.changeRandomColor, 2000);
+  },
 });
 </script>
 <style lang="scss">
+  .deco {
+    position: fixed;
+    overflow: hidden;
+    background: #212121;
+    width: 30vw;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .deco__inner {
+    width: 150%;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: -20%;
+    top: -10%;
+    --swatch-scale: .6;
+    transform: rotate(-10deg);
+  }
+
+  .deco__swatch {
+    flex: 0 0 calc(25% - .5rem);
+    margin: .25rem;
+    > * {
+      pointer-events: none;
+    }
+  }
+
   .home {
     max-width: 35rem;
     padding: var(--s-gutter);
+    padding-left: calc(30vw + var(--s-gutter));
     font-weight: 200;
     font-size: .75em;
 
