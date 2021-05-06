@@ -106,7 +106,7 @@ export default Vue.extend({
 
     &--top {
       color: #212121;
-      z-index: 10;
+      z-index: 30;
 
       .is-home-ready & {
         transition: opacity .1s linear 1.3s;
@@ -147,7 +147,7 @@ export default Vue.extend({
   .intro-anim {
     pointer-events: none;
     opacity: 1;
-    z-index: 1;
+    z-index: 20;
     position: fixed;
     top: 50%;
     left: 50%;
