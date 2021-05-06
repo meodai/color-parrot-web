@@ -96,11 +96,11 @@
             A one-time donation also helps a lot. You will be listed on this webpage under a section called "Patrons".
             The list will be sorted by the amount donated. You can include a link of your choosing.
           </p>
-          <ul>
+          <ul class="payme">
             <li><a href="https://www.paypal.com/paypalme/elastiq">Paypal</a></li>
             <li><a href='https://ko-fi.com/A530429S'>Ko-Fi</a></li>
-            <li>ETH Address: 0xA16448c4caE9b95A3783EC29a56AB36D11660061</li>
-            <li>Bitccoin Address: 383gmyiQruH5z2JnbsukhSMDDmVJ3Bxogr</li>
+            <li><strong>ETH Address</strong> 0xA16448c4caE9b95A3783EC29a56AB36D11660061</li>
+            <li><strong>Bitcoin Address</strong> 383gmyiQruH5z2JnbsukhSMDDmVJ3Bxogr</li>
           </ul>
         </article>
       </div>
@@ -122,15 +122,15 @@
 
   .blabla {
     position: relative;
-    margin: 69vh auto 2rem;
+    margin: calc(50vh + 10rem) auto 2rem;
 
     padding: var(--s-gutter);
     font-weight: 200;
     font-size: .9em;
+    line-height: 1.5;
 
     max-width: 25rem;
     padding-bottom: calc(var(--s-gutter) * 2);
-
 
     article {
       margin-top: 4rem;
@@ -203,7 +203,14 @@
     li {
       margin-top: 1em;
     }
+  }
 
+
+  .payme {
+    strong {
+      display: block;
+      font-weight: 700;
+    }
   }
 
   @keyframes colorwalk {
@@ -220,4 +227,5 @@
       color: rgb(255, 102, 153);
     }
   }
+
 </style>

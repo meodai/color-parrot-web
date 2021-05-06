@@ -121,6 +121,8 @@
     text-decoration: none;
     --radius: -25rem;
 
+    --radius: -39vw;
+
     pointer-events: all;
 
     animation: hide infinite linear;
@@ -128,6 +130,7 @@
 
     @media (orientation: portrait) {
       --radius: -18rem;
+      --radius: -45vw;
     }
 
     .is-home-ready & {
