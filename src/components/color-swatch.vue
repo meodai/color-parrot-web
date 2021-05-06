@@ -304,7 +304,6 @@
     height: 1.2em;
     line-height: 1.2;
     margin-top: 0.45em;
-    text-transform: uppercase;
 
     overflow: hidden;
     white-space: nowrap;

@@ -98,11 +98,13 @@
   /* mobile viewport bug fix */
   min-height: -webkit-fill-available;
 
+  $animationDuration: 160;
+
   &__inner {
     position: absolute;
     top: 50%;
     left: 50%;
-    animation: rotate 160s infinite linear;
+    animation: rotate $animationDuration * 1s infinite linear;
     width: 1px; height: 1px;
   }
 
@@ -119,6 +121,9 @@
 
     --radius: -25rem;
 
+    animation: hide infinite linear;
+    animation-duration: $animationDuration * 1s;
+
     @media (orientation: portrait) {
       --radius: -18rem;
     }
@@ -134,6 +139,7 @@
     @for $i from 1 through 21 {
       &:nth-child(#{$i}) {
         transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(-5rem) scale(.2);
+        animation-delay: #{$animationDuration/21 * -$i}s;
       }
     }
 
@@ -162,5 +168,16 @@
   100% {
     transform: rotate(360deg) scale(.8);
   }
+}
+
+
+@keyframes hide {
+  0%, 38%, 63% {
+    opacity: 1;
+  }
+  38.2%, 62.5% {
+    opacity: 0;
+  }
+
 }
 </style>

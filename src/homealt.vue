@@ -163,6 +163,7 @@ export default Vue.extend({
       opacity: 0;
       transform: translate(-50%, -50%) scale(.01);
     }
+
     &__inner {
       position: absolute;
       top: 50%;

@@ -1,6 +1,5 @@
 <template>
-  <div class="blabla-mask">
-    <section class="blabla">
+  <section class="blabla">
       <div class="blabla__left">
         <h1>Color Parrot</h1>
         <h2>The Color Companion</h2>
@@ -105,8 +104,7 @@
           </ul>
         </article>
       </div>
-    </section>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -117,7 +115,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    clip-path: circle(33% at 50% 50%);
+    clip-path: circle(20% at 50% 50%);
     -webkit-clip-path: circle(33% at 50% 50%);
     overflow-y: scroll;
   }
@@ -130,8 +128,8 @@
     font-weight: 200;
     font-size: .9em;
 
-    max-width: 20rem;
-    padding-bottom: 30vmax;
+    max-width: 25rem;
+    padding-bottom: calc(var(--s-gutter) * 2);
 
 
     article {
