@@ -260,7 +260,7 @@
   font-size: .7rem;
 
   h2 {
-    font-weight: 900;
+    font-weight: 700;
     font-size: 2.2em;
     margin-bottom: 1em;
   }
