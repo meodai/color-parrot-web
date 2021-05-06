@@ -130,6 +130,7 @@ export default Vue.extend({
     .is-home-ready & {
       .crest {
         animation-play-state: running;
+
         &:hover {
           transition: 400ms transform ease-in-out;
           animation: none;
