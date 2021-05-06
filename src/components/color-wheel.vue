@@ -168,7 +168,6 @@
   left: 50%;
   top: 50%;
   pointer-events: none;
-
   transform: translate(-50%, -50%) rotate(calc(var(--angle-percent, 0) * 360deg));
 
   &::after {

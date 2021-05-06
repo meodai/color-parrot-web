@@ -1,21 +1,28 @@
 
 <template>
-  <main v-bind:class="{'is-home-ready': isReady}">
+  <div v-bind:class="{'is-home-ready': isReady}">
     <color-carousel v-bind:color="color"></color-carousel>
     <div class="intro-anim" >
       <div class="intro-anim__inner">
       </div>
     </div>
     <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-        <path d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z" fill="#f69"/>
-        <path d="M80.36 81.34L63 71.34c-.73-.42-1.42-.87-2.1-1.34H20a30 30 0 0 0 30 30h20a10.07 10.07 0 0 1 1.15.07 79.54 79.54 0 0 1 13.28-5.87 10 10 0 0 0-4.07-12.86zM120 140a10 10 0 0 1-10-10v40a30 30 0 0 0 30-30z" fill="#ed0"/>
-        <path d="M70 70h-9.06c.68.47 1.37.92 2.1 1.34l17.32 10a10 10 0 0 1 4.07 12.86 79.64 79.64 0 0 1 20.32-4A40 40 0 0 0 70 70z" fill="#5a0"/><path d="M120 70V50c0-.84 0-1.67.11-2.49L114.64 38l-15-26a30 30 0 0 0-12.13 38.83l7.85 4.53a39.86 39.86 0 0 1 18.51 23.86A10 10 0 0 0 120 70z" fill="#19f"/><path d="M98.66 70.36L88.66 53c-.42-.73-.8-1.46-1.15-2.21L78 45.36l-26-15A30 30 0 0 0 60.94 70H70a39.86 39.86 0 0 1 28 11.41 10 10 0 0 0 .66-11.05z" fill="#6c6"/>
-        <path d="M114 100.2a40 40 0 0 0-18.64-44.84l-7.85-4.53c.35.74.73 1.48 1.15 2.21l10 17.32A10 10 0 0 1 98 81.41 40 40 0 0 1 108.74 100H110q2 0 4 .2z" fill="#176"/>
-        <path d="M120.11 47.51l4.53 7.85a40 40 0 0 1-4.25 46 39.74 39.74 0 0 1 9 3.63A40 40 0 0 0 150 70V20a30 30 0 0 0-29.89 27.51z" fill="#f69"/>
-        <path d="M129.37 105a39.81 39.81 0 0 1-19.37 5v20a10 10 0 0 0 10 10h30a40 40 0 0 0-20.63-35z" fill="#19f"/>
-        <path d="M110 110a39.81 39.81 0 0 0 19.37-5 39.47 39.47 0 0 0-9-3.63 40 40 0 0 0 4.25-46l-4.53-7.85c-.07.82-.11 1.65-.11 2.49V70a10 10 0 0 1-6.13 9.22 40 40 0 0 1 .17 21s-2.51-.2-4.05-.2h-1.27A39.89 39.89 0 0 1 110 110z" fill="#139"/>
-        <circle cx="87.5" cy="127.5" r="7.5" fill="#fff"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 180 180"
+      >
+        <defs>
+          <path vector-effect="non-scaling-stroke" id="crest-feather" d="M70 70H20a30 30 0 0 0 30 30h20a10 10 0 0 1 9.22 6.13A40 40 0 0 1 110 110a40 40 0 0 0-40-40z"/>
+        </defs>
+        <path vector-effect="non-scaling-stroke" class="top-beak" fill="#19F" d="M70 140a40 40 0 0 1 80 0z"/>
+        <use class="crest crest__gold" xlink:href="#crest-feather" fill="#ED0"/>
+        <use class="crest crest__green" xlink:href="#crest-feather" fill="#6C6" transform="rotate(30 110 110)"/>
+        <use class="crest crest__blue" xlink:href="#crest-feather" fill="#19F" transform="rotate(60 110 110)"/>
+        <use class="crest crest__pink" xlink:href="#crest-feather" fill="#F69" transform="rotate(90 110 110)"/>
+        <path vector-effect="non-scaling-stroke" class="head" fill="#F69" d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z"/>
+        <circle class="eye" fill="#FFF" cx="87.5" cy="127.25" r="7.5"/>
+        <path vector-effect="non-scaling-stroke" class="top-beak" fill="#ED0" d="M120 140a10 10 0 0 1-10-10v40a30 30 0 0 0 30-30z"/>
       </svg>
     </div>
     <strong class="turnerlogo">
@@ -36,11 +43,8 @@
         <i>e</i><i>x</i><i>t</i><i>r</i><i>a</i><i>o</i><i>r</i><i>d</i><i>i</i><i>n</i><i>a</i><i>r</i><i>y</i>
       </span>
     </strong>
-    <blabla>
-
-    </blabla>
-
-  </main>
+    <blabla></blabla>
+  </div>
 </template>
 
 <script>
@@ -91,6 +95,47 @@ export default Vue.extend({
     border-radius: 50%;
     padding: 1.5rem;
     z-index: 10;
+
+    path {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    .crest {
+      mix-blend-mode:multiply;
+      transform-origin: 110px 110px;
+      transform: rotate(0deg);
+      animation: 1000ms standup forwards cubic-bezier(.3,.7,0,1);
+      animation-play-state: paused;
+      animation-delay: 1200ms;
+    }
+
+    .crest__gold {
+      --angle: 0deg;
+      transform: rotate(-50deg);
+    }
+    .crest__green {
+      --angle: 30deg;
+      transform: rotate(-50deg);
+    }
+    .crest__blue {
+      --angle: 60deg;
+      transform: rotate(-30deg);
+    }
+    .crest__pink {
+      --angle: 90deg;
+      transform: rotate(-10deg);
+    }
+
+    .is-home-ready & {
+      .crest {
+        animation-play-state: running;
+        &:hover {
+          transition: 400ms transform ease-in-out;
+          animation: none;
+        }
+      }
+    }
   }
 
   .turnerlogo {
@@ -101,7 +146,7 @@ export default Vue.extend({
     left: 50%;
     transform: translate(-50%,-50%);
     color: #fff;
-    font-weight: 100;
+    font-weight: 200;
     font-size: 1.5rem;
 
     &--top {
@@ -178,6 +223,12 @@ export default Vue.extend({
         conic-gradient(hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%));
 
       transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes standup {
+    100% {
+      transform: rotate(var(--angle));
     }
   }
 </style>
