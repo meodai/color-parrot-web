@@ -5,7 +5,6 @@
         <h2>The Color Companion</h2>
       </div>
 
-
       <div class="blabla__right">
         <article>
           <h2>Usage</h2>
@@ -134,6 +133,7 @@
 
     article {
       margin-top: 4rem;
+
       &:first-child {
         margin-top: 0;
       }
@@ -167,7 +167,7 @@
     }
 
     h3 {
-      margin-top: 1.75em;
+      margin-top: 3em;
       font-weight: 600;
       font-size: 1.4rem;
       line-height: 1.1;

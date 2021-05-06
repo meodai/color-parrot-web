@@ -13,8 +13,7 @@ Vue.use(VueMeta)
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/home/', component: Homealt },
+  { path: '/', component: Homealt },
   { path: '/color/:color_id', component: Color },
   { path: '/:colors_id', component: Colors },
 ];
