@@ -328,7 +328,7 @@ export default Vue.extend({
 
   @keyframes colorwalk {
     0% {
-      color: rgb(238, 221, 0);
+      color: #ffdd0f;
     }
     25% {
       color: rgb(102, 204, 102);

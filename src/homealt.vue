@@ -96,7 +96,7 @@ export default Vue.extend({
     padding: 1.5rem;
     z-index: 10;
 
-    path {
+    path, use {
       stroke: #fff;
       stroke-width: 2px;
     }
@@ -111,18 +111,22 @@ export default Vue.extend({
     }
 
     .crest__gold {
+      //fill: #ffdd0f;
       --angle: 0deg;
       transform: rotate(-50deg);
     }
     .crest__green {
+      //fill: #ddff0f;
       --angle: 30deg;
       transform: rotate(-50deg);
     }
     .crest__blue {
+      //fill: #0f98ff;
       --angle: 60deg;
       transform: rotate(-30deg);
     }
     .crest__pink {
+      //fill: #ff0f54;
       --angle: 90deg;
       transform: rotate(-10deg);
     }

@@ -102,6 +102,9 @@
     font-size: calc(var(--swatch-scale, 1) * 8vw);
   }
 
+
+  //box-shadow: 0 -.4em 8em var(--c-color);
+
   overflow: hidden;
 
   .colorswatch__upper {
