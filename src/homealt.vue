@@ -96,6 +96,11 @@ export default Vue.extend({
     padding: 1.5rem;
     z-index: 10;
 
+    @media (orientation: portrait) {
+      width: 10vmax;
+    }
+
+
     path, use {
       stroke: #fff;
       stroke-width: 2px;

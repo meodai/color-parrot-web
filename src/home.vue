@@ -269,6 +269,11 @@ export default Vue.extend({
       border-radius: 50%;
       padding: 1.5rem;
       margin-bottom: 2rem;
+
+      @media (orientation: portrait) {
+        width: 40rem;
+        height: 40rem;
+      }
     }
 
     table {

@@ -130,7 +130,7 @@
 
     @media (orientation: portrait) {
       --radius: -18rem;
-      --radius: -45vw;
+      --radius: -18rem;
     }
 
     .is-home-ready & {
