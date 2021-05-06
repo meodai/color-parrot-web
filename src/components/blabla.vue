@@ -131,6 +131,7 @@
     font-size: .9em;
 
     max-width: 20rem;
+    padding-bottom: 30vmax;
 
 
     article {
