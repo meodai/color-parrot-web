@@ -97,6 +97,7 @@
   min-height: 100vh;
   /* mobile viewport bug fix */
   min-height: -webkit-fill-available;
+  pointer-events: none;
 
   $animationDuration: 160;
 
@@ -120,6 +121,8 @@
     text-decoration: none;
     box-shadow: 0 0 2rem #212121;
     --radius: -25rem;
+
+    pointer-events: all;
 
     animation: hide infinite linear;
     animation-duration: $animationDuration * 1s;
