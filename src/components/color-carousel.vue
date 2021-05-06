@@ -93,7 +93,10 @@
   top: 0;
   right: 0;
   background: #212121;
-  height: 100vh;
+
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 
   &__inner {
     position: absolute;
@@ -114,10 +117,16 @@
     box-shadow: 0 0 0 0px var(--c-card);
     text-decoration: none;
 
+    --radius: -25rem;
+
+    @media (orientation: portrait) {
+      --radius: -18rem;
+    }
+
     .is-home-ready & {
       @for $i from 1 through 21 {
         &:nth-child(#{$i}) {
-          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(-25rem) scale(.75);
+          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(.75);
         }
       }
     }
@@ -132,6 +141,11 @@
       transform: scale(0.95);
       border: 4px solid #fff;
       transition: 200ms transform;
+
+      @media (orientation: portrait) {
+
+        transform: scale(0.6);
+      }
     }
     &:hover {
       > * {
