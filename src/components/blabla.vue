@@ -156,6 +156,7 @@
       font-weight: 900;
       letter-spacing: -0.01em;
       line-height: .9;
+      text-align: center;
     }
 
     h2 {
@@ -176,6 +177,8 @@
     h1 + h2 {
       font-weight: 600;
       margin-top: .5em;
+      text-align: center;
+      margin-bottom: 2em;
     }
 
     p {
