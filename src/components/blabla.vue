@@ -183,6 +183,7 @@
 
     p {
       margin: 2em 0;
+      padding-left: 2em;
     }
 
 
