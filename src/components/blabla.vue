@@ -122,7 +122,7 @@
 
   .blabla {
     position: relative;
-    margin: 65vh auto 2rem;
+    margin: 69vh auto 2rem;
 
     padding: var(--s-gutter);
     font-weight: 200;
