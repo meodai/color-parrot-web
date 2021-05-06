@@ -107,6 +107,7 @@ export default Vue.extend({
     &--top {
       color: #212121;
       z-index: 30;
+      font-weight: 700;
 
       .is-home-ready & {
         transition: opacity .1s linear 1.3s;
