@@ -167,7 +167,7 @@
     }
 
     h3 {
-      margin-top: 1.5em;
+      margin-top: 1.75em;
       font-weight: 600;
       font-size: 1.4rem;
       line-height: 1.1;
@@ -182,7 +182,7 @@
     }
 
     p {
-      margin: 1em 0;
+      margin: 2em 0;
     }
 
 
@@ -197,6 +197,10 @@
         color: #fff;
         animation: none;
       }
+    }
+
+    li {
+      margin-top: 1em;
     }
 
   }
