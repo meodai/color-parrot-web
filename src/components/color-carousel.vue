@@ -160,6 +160,7 @@
       }
     }
     &:hover {
+      z-index: 2;
       > * {
         transform: scale(1.1);
         box-shadow: 0 0rem 5rem var(--color);
