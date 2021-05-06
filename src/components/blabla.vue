@@ -1,7 +1,7 @@
 <template>
   <section class="blabla">
       <div class="blabla__left">
-        <h1>Color Parrot</h1>
+        <h1><i>Color</i> Parrot</h1>
         <h2>The Color Companion</h2>
       </div>
 
@@ -143,7 +143,7 @@
       width: 100%;
     }
 
-    tr,td,caption{
+    tr,td,caption {
       text-align: left;
     }
 
@@ -157,6 +157,12 @@
       letter-spacing: -0.01em;
       line-height: .9;
       text-align: center;
+      i {
+        display: block;
+        margin-bottom: -0.3em;
+        margin-right: -0.25em;
+        font-size: 0.82em;
+      }
     }
 
     h2 {
@@ -170,15 +176,18 @@
       margin-top: 3em;
       font-weight: 600;
       font-size: 1.4rem;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.03em;
+      padding-right: 40%;
     }
 
     h1 + h2 {
       font-weight: 600;
-      margin-top: .5em;
+      margin-top: .05em;
       text-align: center;
       margin-bottom: 2em;
+      font-weight: 200;
+      font-size: 1.7em;
     }
 
     p {
