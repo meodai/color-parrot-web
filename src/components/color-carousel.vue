@@ -8,7 +8,8 @@
           v-for="(color, i) in colors"
           v-bind:key="i"
           v-bind:to="'/color/' + color.requestedHex.replace('#', '')"
-          >
+          v-bind:style="{'--color': color.requestedHex}"
+      >
         <colorswatchsimple
           v-bind:hex="color.requestedHex"
           v-bind:name="color.name"
@@ -116,10 +117,8 @@
     transform-origin: 50% 50%;
     will-change: transform;
     transition: 1s transform cubic-bezier(0.3,0.7,0,1) 1.3s;
-    //box-shadow: 0 0 0 0px var(--c-card), 0 0 8rem var(--color);
     box-shadow: 0 0 0 0px var(--c-card);
     text-decoration: none;
-    box-shadow: 0 0 2rem #212121;
     --radius: -25rem;
 
     pointer-events: all;
@@ -150,6 +149,10 @@
       transform: scale(0.95);
       border: 4px solid #fff;
       transition: 200ms transform;
+
+
+      box-shadow: 0 0 2rem #212121;
+      box-shadow: 0 0 8rem var(--color);
 
       @media (orientation: portrait) {
 
