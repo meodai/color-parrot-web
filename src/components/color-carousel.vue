@@ -92,7 +92,7 @@
   left: 0;
   top: 0;
   right: 0;
-  background: #212121;
+  z-index: 10;
 
   min-height: 100vh;
   /* mobile viewport bug fix */
@@ -118,7 +118,7 @@
     //box-shadow: 0 0 0 0px var(--c-card), 0 0 8rem var(--color);
     box-shadow: 0 0 0 0px var(--c-card);
     text-decoration: none;
-
+    box-shadow: 0 0 2rem #212121;
     --radius: -25rem;
 
     animation: hide infinite linear;
