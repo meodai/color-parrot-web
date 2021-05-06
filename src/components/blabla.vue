@@ -190,6 +190,13 @@
       color: rgb(238, 221, 0);
       animation: colorwalk 15s linear infinite;
       animation-direction: alternate;
+      font-weight: 700;
+      text-decoration: none;
+
+      &:hover {
+        color: #fff;
+        animation: none;
+      }
     }
 
   }
