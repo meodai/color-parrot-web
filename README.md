@@ -1,4 +1,4 @@
-# elastiq.ch
+# color parrot compagnion website
 http://parrot.color.pizza/ website
 
 ## license 
