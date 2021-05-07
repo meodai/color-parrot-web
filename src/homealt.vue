@@ -178,6 +178,7 @@ export default Vue.extend({
 
       animation: rotate 40s infinite linear;
     }
+
     i {
       position: absolute;
       top: 50%;
