@@ -120,6 +120,17 @@
   }
 
   .blabla {
+
+    ::-moz-selection {
+      color: #000;
+      background: #fff;
+      opacity: 1;
+    }
+    ::selection {
+      color: #000;
+      opacity: 1;
+      background: #fff;
+    }
     position: relative;
     margin: calc(50vh + 10rem) auto 2rem;
 
@@ -239,4 +250,9 @@
     }
   }
 
+  @keyframes gradient {
+    100% {
+      background-position: 400% 50%;
+    }
+  }
 </style>
