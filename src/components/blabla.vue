@@ -88,7 +88,7 @@
 
           <h3>Donations &amp; Sponsoring</h3>
           <p>
-            You can <a href="mailto:meodai@gmail.com">contact me</a> if you are interested in becoming a sponsor.
+            You can <a href="mailto:color-parrot-web@elastiq.click">contact me</a> if you are interested in becoming a sponsor.
             You will get a special spot on this website and on the <a href="https://github.com/meodai/color-names">github-project page</a>.
           </p>
           <p>
