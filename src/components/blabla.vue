@@ -202,6 +202,8 @@
       animation-direction: alternate;
       font-weight: 700;
       text-decoration: none;
+      position: relative;
+      z-index: 15;
 
       &:hover {
         color: #fff;

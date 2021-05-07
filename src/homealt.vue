@@ -13,16 +13,16 @@
         viewBox="0 0 180 180"
       >
         <defs>
-          <path vector-effect="non-scaling-stroke" id="crest-feather" d="M70 70H20a30 30 0 0 0 30 30h20a10 10 0 0 1 9.22 6.13A40 40 0 0 1 110 110a40 40 0 0 0-40-40z"/>
+          <path id="crest-feather" d="M70 70H20a30 30 0 0 0 30 30h20a10 10 0 0 1 9.22 6.13A40 40 0 0 1 110 110a40 40 0 0 0-40-40z"/>
         </defs>
-        <path vector-effect="non-scaling-stroke" class="top-beak" fill="#19F" d="M70 140a40 40 0 0 1 80 0z"/>
+        <path class="top-beak" fill="#19F" d="M70 140a40 40 0 0 1 80 0z"/>
         <use class="crest crest__gold" xlink:href="#crest-feather" fill="#ED0"/>
         <use class="crest crest__green" xlink:href="#crest-feather" fill="#6C6" transform="rotate(30 110 110)"/>
         <use class="crest crest__blue" xlink:href="#crest-feather" fill="#19F" transform="rotate(60 110 110)"/>
         <use class="crest crest__pink" xlink:href="#crest-feather" fill="#F69" transform="rotate(90 110 110)"/>
-        <path vector-effect="non-scaling-stroke" class="head" fill="#F69" d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z"/>
+        <path class="head" fill="#F69" d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z"/>
         <circle class="eye" fill="#FFF" cx="87.5" cy="127.25" r="7.5"/>
-        <path vector-effect="non-scaling-stroke" class="top-beak" fill="#ED0" d="M120 140a10 10 0 0 1-10-10v40a30 30 0 0 0 30-30z"/>
+        <path class="top-beak" fill="#ED0" d="M120 140a10 10 0 0 1-10-10v40a30 30 0 0 0 30-30z"/>
       </svg>
     </div>
     <strong class="turnerlogo">
@@ -103,7 +103,7 @@ export default Vue.extend({
 
     path, use {
       stroke: #fff;
-      stroke-width: 2px;
+      stroke-width: 5px;
     }
 
     .crest {

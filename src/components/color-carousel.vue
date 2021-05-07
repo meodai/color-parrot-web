@@ -120,7 +120,6 @@
     box-shadow: 0 0 0 0px var(--c-card);
     text-decoration: none;
     --radius: -25rem;
-
     --radius: -39vw;
 
     pointer-events: all;
@@ -129,7 +128,6 @@
     animation-duration: $animationDuration * 1s;
 
     @media (orientation: portrait) {
-      --radius: -18rem;
       --radius: -18rem;
     }
 
