@@ -1,12 +1,12 @@
 <template>
   <div class="color-pie">
     <p>
-      Because of its color temperatore of {{color.temperature()}} Kelvin, <strong>{{name}}</strong> is considered a {{temperatureAdjectives.adjecives.join(' and ')}} color.
+      Because of its color temperature of {{color.temperature()}} Kelvin, <strong>{{name}}</strong> is considered a {{temperatureAdjectives.adjecives.join(' and ')}} color.
     </p>
     <!--p>Because it is close to the color {{meanings.color}}, <strong>{{name}}</strong> could be a associated with {{meanings.adjecives.join(', ')}}.</p>
     <p>{{meanings.color}}:, {{meanings.desc}}</p-->
     <p>
-      On a screen, the color <strong>{{name}}</strong> is made of
+      On a screen <strong>{{name}}</strong> is made of
       {{(rgb[0] * 100).toFixed(2)}}% red, {{(rgb[1] * 100).toFixed(2)}}% green and
       {{(rgb[2] * 100).toFixed(2)}}% blue <b
         class="color-pie__pie"
