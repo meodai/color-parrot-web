@@ -3,8 +3,18 @@
     class="color-story"
     v-bind:aria-label="name"
     v-bind:class="{'color-story--visible': isVisible}"
-    v-bind:style="{'--currentColor': color}"
+    v-bind:style="{'--currentColor': color.hex()}"
   >
+    <header class="color-story__header">
+      <strong>Color Name</strong>
+      <h1>{{name}}</h1>
+    </header>
+    <aside aria-label="Color Properties" class="color-story__properties">
+      <colordesc
+        v-bind:name="name"
+        v-bind:color="color"
+      ></colordesc>
+    </aside>
     <article
       v-for="article in entries"
       class="color-story__article"
@@ -52,6 +62,7 @@
 
 <script>
   import Vue from 'vue';
+  import colordesc from './color-desc';
 
   const nahWords = ['the', 'a', 'in', 'of', 'an', 'on'];
 
@@ -111,6 +122,9 @@
   }
 
   export default Vue.extend({
+    components: {
+      colordesc,
+    },
     props: ['name', 'color', 'isVisible'],
     data: function () {
       return {
@@ -252,18 +266,42 @@
 </script>
 
 <style lang="scss">
-.color-story__article {
+.color-story {
   --gutter: var(--s-gutter, 2rem);
 
-  padding: var(--gutter);
 
   font-size: .7rem;
 
-  h2 {
+  h1, h2 {
     font-weight: 700;
-    font-size: 2.2em;
-    margin-bottom: 1em;
+    line-height: 1.1;
   }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 2.2em;
+    margin-bottom: 1.1em;
+  }
+
+  ::selection {
+    background: var(--currentColor);
+  }
+}
+.color-story__header {
+  padding: var(--gutter);
+  padding-bottom: 0;
+}
+
+.color-story__properties {
+  padding: var(--gutter);
+  padding-bottom: 0;
+}
+
+.color-story__article {
+  padding: var(--gutter);
 
   & + & {
     margin-top: calc(-.5 * var(--gutter));
@@ -299,10 +337,6 @@
     li {
       margin-top: 1em ;
     }
-  }
-
-  ::selection {
-    background: var(--currentColor);
   }
 }
 

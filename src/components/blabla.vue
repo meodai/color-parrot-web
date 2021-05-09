@@ -154,12 +154,17 @@
       width: 100%;
     }
 
+    thead {
+      font-weight: 700;
+    }
+
     tr,td,caption {
       text-align: left;
     }
 
     caption {
       font-weight: 700;
+      margin-top: 5em;
     }
 
     h1 {

@@ -45,6 +45,7 @@
     "staticPath": "public"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.0-rc.8",
     "chroma-js": "^2.1.1",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4",
