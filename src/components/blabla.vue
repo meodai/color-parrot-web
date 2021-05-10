@@ -164,7 +164,7 @@
 
     caption {
       font-weight: 700;
-      margin-top: 5em;
+      margin-bottom: 1em;
     }
 
     h1 {
