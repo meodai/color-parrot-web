@@ -3,7 +3,11 @@
     class="color-story"
     v-bind:aria-label="name"
     v-bind:class="{'color-story--visible': isVisible}"
-    v-bind:style="{'--currentColor': color.hex()}"
+    v-bind:style="{
+      '--currentColor': color.hex(),
+      '--currentColorContrast': bestContrastTo,
+      '--currentColorContrastShadow': bestContrastTo == '#fff' ? '#000' : '#fff',
+    }"
   >
     <header class="color-story__header">
       <strong>Color Name</strong>
@@ -135,6 +139,9 @@
       };
     },
     computed: {
+      bestContrastTo: function () {
+        return chroma.contrast(this.color, '#fff') > chroma.contrast(this.color, '#000') ? '#fff' : '#000';
+      },
       images: function () {
         if (this.media.length) {
           const imageSets = [];
@@ -289,6 +296,8 @@
 
   ::selection {
     background: var(--currentColor);
+    color: var(--currentColorContrast);
+    text-shadow: 0 2px 0 var(--currentColorContrastShadow);
   }
 }
 .color-story__header {
@@ -362,8 +371,6 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-
-
 </style>
 
 // https://en.wikipedia.org/api/rest_v1/page/media-list/pink

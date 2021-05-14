@@ -170,7 +170,9 @@ export default Vue.extend({
   transform: translateX(0%);
 }
 
-.color-story__article {
+.color-story__article,
+.color-story__properties,
+.color-story__header {
   > *:not(img) {
     opacity: 0;
     transform: translateX(50%);
@@ -180,7 +182,9 @@ export default Vue.extend({
   }
 }
 
-.color-detail--visible .color-story__article {
+.color-detail--visible .color-story__article,
+.color-detail--visible .color-story__properties,
+.color-detail--visible .color-story__header {
   > *:not(img) {
     transform: translateX(0%);
     opacity: 1;
