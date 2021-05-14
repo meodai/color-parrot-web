@@ -62,6 +62,7 @@
 
 <script>
   import Vue from 'vue';
+  import chroma from 'chroma-js';
   import colordesc from './color-desc';
 
   const nahWords = ['the', 'a', 'in', 'of', 'an', 'on'];
