@@ -68,7 +68,7 @@ export default Vue.extend({
     }
   },
   mounted () {
-    this.cd.color = this.color;
+    this.cd = new ColorDescription(this.color);
   }
 });
 </script>
