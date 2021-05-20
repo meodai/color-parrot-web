@@ -84,4 +84,10 @@ select {
   }
 }
 
+button {
+  border: 0;
+  -webkit-appearance: none;
+  background: transparent;
+  padding: 0;
+}
 </style>

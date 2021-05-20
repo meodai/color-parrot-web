@@ -2,7 +2,7 @@
   <div class="color-pie">
     <!--p>Because it is close to the color {{meanings.color}}, <strong>{{name}}</strong> could be a associated with {{meanings.adjecives.join(', ')}}.</p>
     <p>{{meanings.color}}:, {{meanings.desc}}</p-->
-    <p><strong>{{name}}</strong> can be described as {{cd.getAdjectivesList()}}.</p>
+    <p><strong>{{name}}</strong> can be described as {{adjectives}}.</p>
     <p>If used as background, {{cd.bestContrast}} text would be the most readable on in.</p>
     <p>An LCD screen needs {{cd.percentageWords('gl')[0]}} red, {{cd.percentageWords('gl')[1]}} green and {{cd.percentageWords('gl')[2]}} blue to produce this color.</p>
     <!--p>
@@ -38,16 +38,24 @@ import ColorDescription from '../colorlore';
 export default Vue.extend({
   data: function() {
     return {
-      cd: new ColorDescription('#fff'),
+      cd: new ColorDescription(this.color),
     }
   },
   props: [
     'color', 'name'
   ],
+  watch: {
+    color () {
+      this.cd = new ColorDescription(this.color);
+    }
+  },
   computed: {
     temperatureAdjectives () {
     },
     meanings () {
+    },
+    adjectives () {
+      return this.cd.getAdjectivesList()
     },
     rgbGradient () {
       const gl = this.rgb;
@@ -68,7 +76,6 @@ export default Vue.extend({
     }
   },
   mounted () {
-    this.cd = new ColorDescription(this.color);
   }
 });
 </script>

@@ -14,6 +14,14 @@
         v-bind:color="color"
       ></colorstory>
     </div>
+
+    <router-link class="color-detail__close" to="/" aria-label="close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <title>close</title>
+        <line x1="10" y1="10" x2="90" y2="90" />
+        <line x1="10" y1="90" x2="90" y2="10" />
+      </svg>
+    </router-link>
     <!--form
       action="#"
       class="color-detail__mode"
@@ -75,12 +83,6 @@ export default Vue.extend({
       return this.$store.state.isReady;
     },
   },
-  watch: {},
-  methods: {
-    urlToColors: function () {
-
-    },
-  },
   created () {
     this.$store.dispatch('GET_COLOR', {
       values: [this.$route.params.color_id],
@@ -106,6 +108,31 @@ export default Vue.extend({
 
   @media (orientation: portrait) {
     overflow: visible;
+  }
+
+  &__close {
+    position: absolute;
+    color: #fff;
+    padding: var(--s-gutter, 2rem);
+    top: 0;
+    right: 0;
+    svg {
+      display: block;
+      width: 1.8rem;
+      height: 1.8rem;
+      line {
+        stroke: #fff;
+        stroke-width: 0px;
+        stroke-linecap: round;
+        transition: 333ms stroke-width ease-in 1500ms;
+      }
+    }
+  }
+}
+
+.color-detail--visible .color-detail__close {
+  svg line {
+    stroke-width: 8px;
   }
 }
 
