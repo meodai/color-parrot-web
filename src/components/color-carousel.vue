@@ -7,7 +7,7 @@
           class="color-carousel__card"
           v-for="(color, i) in colors"
           v-bind:key="i"
-          v-bind:to="'/color/' + color.requestedHex.replace('#', '')"
+          v-bind:to="'/color/' + color.requestedHex.replace('#', '') + '/❤'"
           v-bind:style="{'--color': color.requestedHex}"
       >
         <colorswatchsimple

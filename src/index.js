@@ -15,6 +15,7 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/', component: Homealt },
   { path: '/color/:color_id', component: Color },
+  { path: '/color/:color_id/:bestof', component: Color },
   { path: '/:colors_id', component: Colors },
 ];
 

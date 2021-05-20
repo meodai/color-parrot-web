@@ -84,9 +84,10 @@ export default Vue.extend({
     },
   },
   created () {
+    console.log(this.$route.params.bestof)
     this.$store.dispatch('GET_COLOR', {
       values: [this.$route.params.color_id],
-      goodnamesonly: false,
+      goodnamesonly: !!this.$route.params.bestof,
     });
   },
   mounted () {
