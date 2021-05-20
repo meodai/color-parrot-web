@@ -269,6 +269,11 @@
     },
     mounted () {
       if (this.name) this.getInfo();
+    },
+    beforeDestroy () {
+      this.responses = [];
+      this.defintions = [];
+      this.media = [];
     }
   });
 </script>
