@@ -116,6 +116,7 @@ export default Vue.extend({
     padding: var(--s-gutter, 2rem);
     top: 0;
     right: 0;
+
     svg {
       display: block;
       width: 1.8rem;
@@ -124,7 +125,7 @@ export default Vue.extend({
         stroke: #fff;
         stroke-width: 0px;
         stroke-linecap: round;
-        transition: 333ms stroke-width ease-in 1500ms;
+        transition: 333ms stroke-width ease-in 1000ms;
       }
     }
   }
