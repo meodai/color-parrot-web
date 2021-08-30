@@ -3,30 +3,8 @@
     <!--p>Because it is close to the color {{meanings.color}}, <strong>{{name}}</strong> could be a associated with {{meanings.adjecives.join(', ')}}.</p>
     <p>{{meanings.color}}:, {{meanings.desc}}</p-->
     <p><strong>{{name}}</strong> can be described as {{adjectives}}.</p>
-    <p>If used as background, {{cd.bestContrast}} text would be the most readable on in.</p>
+    <p>If `{{name}}` is used as background, <strong>{{cd.bestContrast}}</strong> text would be the most readable on it.</p>
     <p>An LCD screen needs {{cd.percentageWords('gl')[0]}} red, {{cd.percentageWords('gl')[1]}} green and {{cd.percentageWords('gl')[2]}} blue to produce this color.</p>
-    <!--p>
-      On a screen <strong>{{name}}</strong> is made of
-      {{(rgb[0] * 100).toFixed(2)}}% red, {{(rgb[1] * 100).toFixed(2)}}% green and
-      {{(rgb[2] * 100).toFixed(2)}}% blue <b
-        class="color-pie__pie"
-      ><i v-bind:style="{'background-image': rgbGradient}"></i></b>.
-    </p-->
-    <!--figure>
-      <div
-        class="color-pie__pie"
-        v-bind:style="{'background-image': cmykGradient}"
-      ></div>
-      <figcaption>
-		    <strong
-          v-for="(c, i) in cmyk"
-          v-bind:key="i"
-        >
-          {{i === 0 && 'Cyan' || i === 1 && 'Magenta' || i === 2 && 'Yellow' || i === 3 && 'Black'}}
-          {{(c * 100).toFixed(2)}}%
-        </strong>
-		  </figcaption>
-    </figure-->
   </div>
 </template>
 

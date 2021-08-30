@@ -44,6 +44,7 @@
       </span>
     </strong>
     <blabla></blabla>
+    <!--img class="footerimg" src="../public/parrot_nobr.png" alt="Color Parrot Logo on a Desk" /-->
   </div>
 </template>
 
@@ -241,5 +242,13 @@ export default Vue.extend({
     100% {
       transform: rotate(var(--angle));
     }
+  }
+
+  .footerimg {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    bottom: -2rem;
+    pointer-events: none;
   }
 </style>
