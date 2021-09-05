@@ -1,7 +1,7 @@
 
 <template>
-  <div v-bind:class="{'is-home-ready': isReady}">
-    <color-carousel v-bind:color="color"></color-carousel>
+  <div v-bind:class="{'is-home-ready': isReady, 'is-footer-visible': footerVisible}">
+    <color-carousel v-bind:startColor="startColor" v-bind:color="color"></color-carousel>
     <div class="intro-anim" >
       <div class="intro-anim__inner">
       </div>
@@ -44,6 +44,40 @@
       </span>
     </strong>
     <blabla></blabla>
+    <div ref="footer" class="footer">
+      <div class="footer__logo">
+        <div class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 180 180"
+          >
+            <defs>
+              <path id="crest-feather" d="M70 70H20a30 30 0 0 0 30 30h20a10 10 0 0 1 9.22 6.13A40 40 0 0 1 110 110a40 40 0 0 0-40-40z"/>
+            </defs>
+            <path class="top-beak" fill="#19F" d="M70 140a40 40 0 0 1 80 0z"/>
+            <use class="crest crest__gold" xlink:href="#crest-feather" fill="#ED0"/>
+            <use class="crest crest__green" xlink:href="#crest-feather" fill="#6C6" transform="rotate(30 110 110)"/>
+            <use class="crest crest__blue" xlink:href="#crest-feather" fill="#19F" transform="rotate(60 110 110)"/>
+            <use class="crest crest__pink" xlink:href="#crest-feather" fill="#F69" transform="rotate(90 110 110)"/>
+            <path class="head" fill="#F69" d="M30 170h80v-60a39.8 39.8 0 0 0-5.25-19.81A80 80 0 0 0 30 170z"/>
+            <circle class="eye" fill="#FFF" cx="87.5" cy="127.25" r="7.5"/>
+            <path class="top-beak" fill="#ED0" d="M120 140a10 10 0 0 1-10-10v40a30 30 0 0 0 30-30z"/>
+          </svg>
+        </div>
+      </div>
+
+      <form class="footer__form" action="#">
+        <label>
+          <span>saturation</span>
+          <input type="range" min="0" max="1" step="0.001" v-model="startColor[1]">
+        </label>
+        <label>
+          <span>light</span>
+          <input type="range" min="0" max="1" step="0.001" v-model="startColor[2]">
+        </label>
+      </form>
+    </div>
     <!--img class="footerimg" src="../public/parrot_nobr.png" alt="Color Parrot Logo on a Desk" /-->
   </div>
 </template>
@@ -63,7 +97,8 @@ export default Vue.extend({
     return {
       color: '#fff',
       isReady: false,
-      startColor: [0,1,1],
+      startColor: [0, 1, .53],
+      footerVisible: false,
     }
   },
   computed: {
@@ -78,6 +113,23 @@ export default Vue.extend({
       window.scrollTo(0, 0);
       this.isReady = true;
     }, 500);
+
+    let options = {
+      rootMargin: '0px',
+      threshold: .75
+    }
+
+    let observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.footerVisible = true;
+        } else {
+          this.footerVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.$refs.footer)
   },
 });
 </script>
@@ -250,5 +302,28 @@ export default Vue.extend({
     width: 100%;
     bottom: -2rem;
     pointer-events: none;
+  }
+
+  .footer {
+    height: 100vh;
+    position: relative;
+  }
+
+  .footer__form {
+    z-index: 10;
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .7rem;
+    text-align: center;
+    label {
+      display: block;
+      margin-top: 1em;
+    }
+  }
+
+  .is-footer-visible {
+
   }
 </style>

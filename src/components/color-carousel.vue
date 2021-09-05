@@ -13,7 +13,7 @@
         <colorswatchsimple
           v-bind:hex="color.requestedHex"
           v-bind:name="color.name"
-        ></color-card>
+        />
       </router-link>
     </div>
   </div>
@@ -28,18 +28,23 @@
     components: {
       colorswatchsimple,
     },
-    props: ['color'],
+    props: ['color', 'startColor'],
     data: () => {
       return {
         total: 21,
-        colors: []
+        colors: [],
+        timer: null,
       }
     },
     methods: {
       getNewColors () {
         // this.$store.getters.namedColors(this.$store.getters.colorHarmony(20), true, true);
         const rainbow = (new Array(this.total)).fill('').map((d,i) => (
-          chroma.hsl(i/this.total * 360, 1,.53).hex()
+          chroma.hsl(
+            i/this.total * 360,
+            parseFloat(this.startColor[1]),
+            parseFloat(this.startColor[2])
+          ).hex()
         ));
 
         this.fetchColors(rainbow);
@@ -65,6 +70,12 @@
       }
     },
     watch: {
+      startColor: function () {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.getNewColors();
+        }, 150);
+      }
       /*
       color: function(e) {
         if (e.hex === '#ffffff') return;
@@ -121,6 +132,7 @@
     text-decoration: none;
     --radius: -25rem;
     --radius: -39vw;
+    --scale: .75;
 
     pointer-events: all;
 
@@ -131,10 +143,20 @@
       --radius: -18rem;
     }
 
+    .is-footer-visible & {
+      --radius: -40vmin;
+      --scale: .4;
+      transition: 300ms transform cubic-bezier(0.3,0.7,0,1);
+      //animation: none;
+      > * {
+        box-shadow: 0 0rem 4rem var(--color);
+      }
+    }
+
     .is-home-ready & {
       @for $i from 1 through 21 {
         &:nth-child(#{$i}) {
-          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(.75);
+          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(var(--scale));
         }
       }
     }
@@ -156,7 +178,6 @@
       box-shadow: 0 1rem 8rem var(--color);
 
       @media (orientation: portrait) {
-
         transform: scale(0.6);
       }
     }
