@@ -316,18 +316,117 @@ export default Vue.extend({
   .footer__form {
     z-index: 10;
     position: absolute;
-    bottom: 4rem;
+    bottom: 3.5rem;
     left: 50%;
     transform: translateX(-50%);
     font-size: .7rem;
     text-align: center;
+
     label {
       display: block;
       margin-top: 1em;
     }
   }
 
-  .is-footer-visible {
+  .footer {
+    --color-inverted: #fff;
+    --c-black: #212121;
+    input {
+      background-color: transparent;
+    }
+    input[type=range],
+    input[type=color] {
+      -webkit-appearance: none;
+    }
+
+    // range sliders
+    input[type=range] {
+      margin: 0;
+      padding-top: 0.7em;
+      margin-top: -0.7em;
+    }
+
+    input[type=range]:focus {
+      outline: none;
+
+      &::-webkit-slider-thumb {
+        //height: .65rem;
+        background-color: var(--color-inverted);
+        clip-path: polygon(100% 0%, 0% 0%, 50% 100%, 50% 100%);
+        //clip-path: polygon(50% 0%, 50% 0%, 0% 100%, 100% 100%);
+      }
+    }
+
+    @mixin slider-track {
+      width: 100%;
+      height: 1rem;
+      animate: 0.2s;
+      background: transparent;
+      color: var(--c-black);
+      border-radius: 0;
+      border: solid var(--color-inverted);
+      border-width: 0 0 1px;
+    }
+
+    @mixin slider-thumb {
+      border: 2px solid transparent;
+      height: .75rem;
+      width: .5rem;
+      border-radius: 0;
+      background: var(--color-inverted);
+      -webkit-appearance: none;
+      margin-top: 0.25rem;
+      transition: 150ms background-color, 200ms clip-path, 200ms -webkit-clip-path;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      @include slider-track;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      @include slider-thumb;
+    }
+
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      //background: $c-black;
+    }
+
+    input[type=range]::-moz-range-track {
+      @include slider-track;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      @include slider-thumb;
+    }
+
+    input[type=range]::-ms-track {
+      @include slider-track;
+    }
+
+    input[type=range]::-ms-fill-lower {
+      background: var(--color-inverted);
+      border: none;
+      border-radius: 100%;
+    }
+
+    input[type=range]::-ms-fill-upper {
+      background: var(--color-inverted);
+      border-radius: 100%;
+      box-shadow: none;
+    }
+
+    input[type=range]::-ms-thumb {
+      @include slider-thumb;
+    }
+
+    input[type=range]:focus::-ms-fill-lower {
+      //background: $c-black;
+    }
+
+    input[type=range]:focus::-ms-fill-upper {
+      //background: $c-black;
+    }
 
   }
 </style>
