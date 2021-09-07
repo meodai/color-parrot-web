@@ -151,7 +151,6 @@
       transition: 300ms transform cubic-bezier(0.3,0.7,0,1);
       //animation: none;
       > * {
-
         box-shadow: 0 0rem 4rem var(--color);
       }
     }
@@ -173,12 +172,12 @@
 
     > * {
       transform: scale(0.95);
-      border: 4px solid #fff;
+      //border: 4px solid #fff;
       transition: 200ms transform, 200ms box-shadow;
 
 
       box-shadow: 0 0 2rem #212121;
-      box-shadow: 0 1rem 8rem var(--color);
+      //box-shadow: 0 1rem 8rem var(--color);
 
       @media (orientation: portrait) {
         transform: scale(0.6);
