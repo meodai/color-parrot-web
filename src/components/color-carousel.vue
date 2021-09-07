@@ -151,7 +151,7 @@
       transition: 300ms transform cubic-bezier(0.3,0.7,0,1);
       //animation: none;
       > * {
-        box-shadow: 0 0rem 4rem var(--color);
+        //box-shadow: 0 0rem 4rem var(--color);
       }
     }
 
