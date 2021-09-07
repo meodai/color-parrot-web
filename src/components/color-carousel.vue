@@ -153,6 +153,12 @@
       > * {
         //box-shadow: 0 0rem 4rem var(--color);
       }
+
+      &:hover {
+        > * {
+          transform: scale(1.9);
+        }
+      }
     }
 
     .is-home-ready & {

@@ -19,6 +19,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+
 .color-card {
   --c-card: #fff;
   --c-text: #000;
