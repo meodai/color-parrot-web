@@ -35,7 +35,7 @@ export default Vue.extend({
 
   div {
     display: block;
-    padding: 0.5em 0.25rem 0.3rem;
+    padding: 0.5em 0.4rem 0.3rem;
   }
 
   h2 {
