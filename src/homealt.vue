@@ -69,6 +69,10 @@
 
       <form class="footer__form" action="#">
         <label>
+          <span>hue start</span>
+          <input type="range" min="0" max="1" step="0.001" v-model="startColor[0]">
+        </label>
+        <label>
           <span>saturation</span>
           <input type="range" min="0" max="1" step="0.001" v-model="startColor[1]">
         </label>

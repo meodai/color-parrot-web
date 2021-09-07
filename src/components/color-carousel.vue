@@ -39,9 +39,11 @@
     methods: {
       getNewColors () {
         // this.$store.getters.namedColors(this.$store.getters.colorHarmony(20), true, true);
+        const hueShift = (360/this.total) * this.startColor[0];
+
         const rainbow = (new Array(this.total)).fill('').map((d,i) => (
           chroma.hsl(
-            i/this.total * 360,
+            (-hueShift + (i/this.total * 360)) % 360,
             parseFloat(this.startColor[1]),
             parseFloat(this.startColor[2])
           ).hex()
@@ -149,6 +151,7 @@
       transition: 300ms transform cubic-bezier(0.3,0.7,0,1);
       //animation: none;
       > * {
+
         box-shadow: 0 0rem 4rem var(--color);
       }
     }
