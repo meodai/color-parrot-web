@@ -91,6 +91,7 @@ export default Vue.extend({
     });
   },
   mounted () {
+    window.scrollTo(0, 0);
     this.timer = setTimeout(() => {
       this.show = true;
     }, 100);
