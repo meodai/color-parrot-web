@@ -97,7 +97,7 @@
           </p>
           <ul class="payme">
             <li><a href="https://www.paypal.com/paypalme/elastiq">Paypal</a></li>
-            <li><a href='https://ko-fi.com/A530429S'>Ko-Fi</a></li>
+            <li><a href='https://ko-fi.com/colorparrot'>Ko-Fi</a></li>
             <li><strong>ETH Address</strong> 0xA16448c4caE9b95A3783EC29a56AB36D11660061</li>
             <li><strong>Bitcoin Address</strong> 383gmyiQruH5z2JnbsukhSMDDmVJ3Bxogr</li>
           </ul>
