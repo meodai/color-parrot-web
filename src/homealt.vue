@@ -1,7 +1,7 @@
 
 <template>
-  <div v-bind:class="{'is-home-ready': isReady, 'is-footer-visible': footerVisible}">
-    <color-carousel v-bind:startColor="startColor" v-bind:color="color"></color-carousel>
+  <div v-bind:class="{'is-home-ready': isReady, 'is-footer-visible': footerVisible, 'has-noAnimation': noanimation}">
+    <color-carousel v-bind:startColor="startColor" v-bind:color="color" v-bind:noanimation="noanimation"></color-carousel>
     <div class="intro-anim" >
       <div class="intro-anim__inner">
       </div>
@@ -103,6 +103,7 @@ export default Vue.extend({
       isReady: false,
       startColor: [0, 1, .53],
       footerVisible: false,
+      noanimation: false,
     }
   },
   computed: {
@@ -110,6 +111,19 @@ export default Vue.extend({
   methods: {
     changeColor: function (color) {
       this.color = color;
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    if (
+      from &&
+      from.hasOwnProperty('name') &&
+      (from.name === 'color' || from.name === 'bestcolor')
+    ) {
+      next(vm => {
+        vm.noanimation = true;
+      });
+    } else {
+      next();
     }
   },
   mounted () {
@@ -170,7 +184,13 @@ export default Vue.extend({
       animation: 1000ms standup forwards cubic-bezier(.3,.7,0,1);
       animation-play-state: paused;
       animation-delay: 1200ms;
+
+      .has-noAnimation & {
+        animation-delay: 200ms;
+        animation-play-state: running;
+      }
     }
+
 
     .crest__gold {
       //fill: #ffdd0f;
@@ -224,6 +244,10 @@ export default Vue.extend({
       .is-home-ready & {
         transition: opacity .1s linear 1.3s;
         opacity: 0;
+      }
+      .has-noAnimation & {
+        display: none;
+        animation-play-state: paused;
       }
     }
 
@@ -292,6 +316,10 @@ export default Vue.extend({
 
       transform: translate(-50%, -50%);
     }
+  }
+
+  .has-noAnimation .intro-anim {
+    display: none;
   }
 
   @keyframes standup {

@@ -14,14 +14,25 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: '/', component: Homealt },
-  { path: '/color/:color_id', component: Color },
-  { path: '/color/:color_id/:bestof', component: Color },
-  { path: '/:colors_id', component: Colors },
+  { path: '/color/:color_id', component: Color, name: 'color' },
+  { path: '/color/:color_id/:bestof', component: Color , name: 'bestcolor'},
+  //{ path: '/:colors_id', component: Colors },
 ];
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  /*scrollBehavior(to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      console.log(to, from, savedPosition)
+      setTimeout(() => {
+        resolve({
+          x: 0,
+          y: 1000
+        })
+      }, 500)
+    })
+  }*/
 });
 
 new Vue({

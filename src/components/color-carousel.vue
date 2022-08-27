@@ -1,7 +1,6 @@
 
 <template>
-  <div class="color-carousel">
-
+  <div class="color-carousel" v-bind:class="{'has-noAnimation': noanimation}">
     <div class="color-carousel__inner">
       <router-link
           class="color-carousel__card"
@@ -28,7 +27,7 @@
     components: {
       colorswatchsimple,
     },
-    props: ['color', 'startColor'],
+    props: ['color', 'startColor', 'noanimation'],
     data: () => {
       return {
         total: 21,
@@ -173,6 +172,15 @@
       &:nth-child(#{$i}) {
         transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(-5rem) scale(.2);
         animation-delay: #{$animationDuration/21 * -$i}s;
+      }
+    }
+
+    .has-noAnimation & {
+      @for $i from 1 through 21 {
+        &:nth-child(#{$i}) {
+          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(var(--scale));
+          animation-delay: 0;
+        }
       }
     }
 
