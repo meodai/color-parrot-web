@@ -92,6 +92,8 @@ import Vue from "vue";
 import colorCarousel from './components/color-carousel.vue';
 import blabla from './components/blabla.vue';
 
+let lastKnownTop = 0;
+
 export default Vue.extend({
   components: {
     colorCarousel,
@@ -111,14 +113,13 @@ export default Vue.extend({
   methods: {
     changeColor: function (color) {
       this.color = color;
-    }
+    },
+    handleScroll: function () {
+      lastKnownTop = window.scrollY;
+    },
   },
   beforeRouteEnter(to, from, next) {
-    if (
-      from &&
-      from.hasOwnProperty('name') &&
-      (from.name === 'color' || from.name === 'bestcolor')
-    ) {
+    if (from && from.path !== '/') {
       next(vm => {
         vm.noanimation = true;
       });
@@ -126,11 +127,22 @@ export default Vue.extend({
       next();
     }
   },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   mounted () {
-    setTimeout(() => {
-      window.scrollTo(0, 0);
+    if (this.noanimation) {
       this.isReady = true;
-    }, 500);
+      console.log(this.lastKnownTop, 'lastKnownTop');
+      window.scrollTo(0, lastKnownTop);
+    } else {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        this.isReady = true;
+      }, 500);
+    }
+
+    window.addEventListener('scroll', this.handleScroll);
 
     let options = {
       rootMargin: '0px',
@@ -349,6 +361,11 @@ export default Vue.extend({
     transform: translateX(-50%);
     font-size: .7rem;
     text-align: center;
+    width: 20%;
+
+    @media (orientation: portrait) {
+      width: 50%;
+    }
 
     label {
       display: block;
@@ -356,11 +373,14 @@ export default Vue.extend({
     }
   }
 
+
+
   .footer {
     --color-inverted: #fff;
     --c-black: #212121;
     input {
       background-color: transparent;
+      width: 100%;
     }
     input[type=range],
     input[type=color] {
