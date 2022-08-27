@@ -1,23 +1,18 @@
 <template>
-  <div class="picker" v-bind:style="{
+  <div class="picker-hsv" v-bind:style="{
     '--currentcolor': hex,
     '--ui-color': uicolor,
     '--h': h,
     '--s': s,
     '--l': l,
   }">
-    <div class="picker__circle"
+    <div class="picker-hsv__circle"
       ref="pickerwheel"
       v-on:pointerdown="pointerdown"
       v-on:pointermove="pointermove"
     >
-      <div class="picker__arrow" v-bind:style="{'--angle-percent': pointAnglePercent}"></div>
-      <div class="picker-pointer" ref="pointer"></div>
+      <div class="picker-hsv-pointer" ref="pointer"></div>
     </div>
-    <div v-if="saturationSlider" class="picker__slider">
-      <input type="range" min="0" max="1" step="0.0001" v-bind:value="s" v-on:input="updateSaturation" />
-    </div>
-    <input type="color" v-model="hex" />
   </div>
 </template>
 <script>
@@ -59,10 +54,9 @@
     methods: {
       updateSaturation: function (e) {
         this.s = parseFloat(e.target.value);
-        console.log(this.s)
-
-          this.setColor();
+        this.setColor();
       },
+
       pointerdown: function (e) {
         this.isDraggin = true;
         this.placePointer(e.offsetX, e.offsetY);
@@ -80,29 +74,36 @@
         this.pickerWheelRect = this.$refs.pickerwheel.getBoundingClientRect();
       },
 
-      placePointer: function (x,y) {
+      placePointer: function (x, y) {
         if (!this.isDraggin) return;
 
         requestAnimationFrame(() => {
-          this.$refs.pointer.style.top = y + 'px';
-          this.$refs.pointer.style.left = x + 'px';
 
           const centerX = this.pickerWheelRect.width * 0.5;
           const centerY = this.pickerWheelRect.height * 0.5;
 
-          const distToCenterPercent = Math.sqrt(Math.pow(Math.abs(centerY - y), 2) + Math.pow(Math.abs(centerX - x), 2)) / (this.pickerWheelRect.width * .5);
+          const distToCenterPercent = Math.sqrt(
+            Math.pow(Math.abs(centerY - y), 2) +
+            Math.pow(Math.abs(centerX - x), 2)) / (this.pickerWheelRect.width * .5
+          );
 
           const pointAnglePercent = pointToAnglePercentile(
-            x,
-            y,
-            centerX,
-            centerY
+            x, y, centerX, centerY
           );
+
+          const r = this.pickerWheelRect.width / 2;
+
+          const xc = Math.round( Math.cos(pointAnglePercent) * r);
+          const yc = Math.round(-Math.sin(pointAnglePercent) * r);
+
+
+          this.$refs.pointer.style.top = yc + 'px';
+          this.$refs.pointer.style.left = xc + 'px';
 
           this.pointAnglePercent = pointAnglePercent;
 
           this.h = pointAnglePercent * 360 % 360;
-          this.l = 1 - distToCenterPercent;
+          //this.l = distToCenterPercent;
 
           this.setColor();
         });
@@ -137,8 +138,8 @@
         const r = this.pickerWheelRect.width * 0.5;
 
         const angle = (this.h - 90) / 180 * Math.PI;
-        const x = r + (r * (1 - l)) * Math.cos(angle);
-        const y = r + (r * (1 - l)) * Math.sin(angle);
+        const x = r + r * Math.cos(angle);
+        const y = r + r * Math.sin(angle);
 
         this.$refs.pointer.style.top = `${y}px`;
         this.$refs.pointer.style.left = `${x}px`;
@@ -167,25 +168,20 @@
 </script>
 <style lang="scss">
 
-.picker {
+.picker-hsv {
   position: relative;
-  width: min-content;
 }
 
-.picker__circle {
-  --size: 10rem;
+.picker-hsv__circle {
   position: relative;
   border-radius: 50%;
-  width: var(--size);
-  height: var(--size);
-  background: radial-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%),
-              radial-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 80%),
-              conic-gradient(hsl(0, calc(var(--s, 1) * 100%), 50%), hsl(60, calc(var(--s, 1) * 100%), 50%), hsl(120, calc(var(--s, 1) * 100%), 50%), hsl(180, calc(var(--s, 1) * 100%), 50%), hsl(240, calc(var(--s, 1) * 100%), 50%), hsl(300, calc(var(--s, 1) * 100%), 50%), hsl(360, calc(var(--s, 1) * 100%), 50%));
-  border: 2px solid var(--ui-color, #212121);
+  aspect-ratio: 1;
+  background: conic-gradient(hsl(0, calc(var(--s, 1) * 100%), 50%), hsl(60, calc(var(--s, 1) * 100%), 50%), hsl(120, calc(var(--s, 1) * 100%), 50%), hsl(180, calc(var(--s, 1) * 100%), 50%), hsl(240, calc(var(--s, 1) * 100%), 50%), hsl(300, calc(var(--s, 1) * 100%), 50%), hsl(360, calc(var(--s, 1) * 100%), 50%));
+
   overflow: hidden;
 }
 
-.picker__arrow {
+.picker-hsv__arrow {
   position: absolute;
   width: 1rem;
   height: 100%;
@@ -207,7 +203,7 @@
   }
 }
 
-.picker-pointer {
+.picker-hsv-pointer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -220,117 +216,14 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.picker__slider {
+.picker-hsv__slider {
   margin-top: 1rem;
 }
 
-.picker {
+.picker-hsv {
    --color-inverted: #fff;
   --c-black: #212121;
-  input[type=color] {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-  }
-  input[type=range] {
-    top: 1rem;
-    display: block;
-    background: none;
-    -webkit-appearance: none;
-  }
 
-  // range sliders
-  input[type=range] {
-    margin: 0;
-    padding-top: 0.7em;
-    margin-top: -0.7em;
-    width: 100%;
-  }
-
-  input[type=range]:focus {
-    outline: none;
-
-    &::-webkit-slider-thumb {
-      //height: .65rem;
-      background-color: var(--color-inverted);
-      clip-path: polygon(100% 0%, 0% 0%, 50% 100%, 50% 100%);
-      //clip-path: polygon(50% 0%, 50% 0%, 0% 100%, 100% 100%);
-    }
-  }
-
-  @mixin slider-track {
-    width: 100%;
-    height: 1rem;
-    animate: 0.2s;
-    background: linear-gradient(to right, hsl(var(--h,360), 0%, calc(var(--l,1) * 100%)), hsl(var(--h,360), 100%, calc(var(--l,1) * 100%)) );
-    background-size: 100% .2rem;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    color: var(--c-black);
-    border-radius: 0;
-    border: solid var(--color-inverted);
-    border-width: 0 0 1px;
-  }
-
-  @mixin slider-thumb {
-    border: 2px solid transparent;
-    height: .75rem;
-    width: .5rem;
-    border-radius: 0;
-    background: var(--color-inverted);
-    -webkit-appearance: none;
-    margin-top: 0.25rem;
-    transition: 150ms background-color, 200ms clip-path, 200ms -webkit-clip-path;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-  }
-
-  input[type=range]::-webkit-slider-runnable-track {
-    @include slider-track;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    @include slider-thumb;
-  }
-
-  input[type=range]:focus::-webkit-slider-runnable-track {
-    //background: $c-black;
-  }
-
-  input[type=range]::-moz-range-track {
-    @include slider-track;
-  }
-
-  input[type=range]::-moz-range-thumb {
-    @include slider-thumb;
-  }
-
-  input[type=range]::-ms-track {
-    @include slider-track;
-  }
-
-  input[type=range]::-ms-fill-lower {
-    background: var(--color-inverted);
-    border: none;
-    border-radius: 100%;
-  }
-
-  input[type=range]::-ms-fill-upper {
-    background: var(--color-inverted);
-    border-radius: 100%;
-    box-shadow: none;
-  }
-
-  input[type=range]::-ms-thumb {
-    @include slider-thumb;
-  }
-
-  input[type=range]:focus::-ms-fill-lower {
-    //background: $c-black;
-  }
-
-  input[type=range]:focus::-ms-fill-upper {
-    //background: $c-black;
-  }
 }
 
 </style>

@@ -97,6 +97,13 @@ export default Vue.extend({
     colorCarousel,
     blabla,
   },
+  /*beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (!from || from.fullPath === '/') {
+
+      }
+    });
+  },*/
   data() {
     return {
       color: '#fff',
@@ -105,12 +112,13 @@ export default Vue.extend({
       footerVisible: false,
     }
   },
+
   computed: {
   },
   methods: {
     changeColor: function (color) {
       this.color = color;
-    }
+    },
   },
   mounted () {
     setTimeout(() => {

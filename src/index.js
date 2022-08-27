@@ -7,16 +7,21 @@ import Home from './home.vue';
 import Homealt from './homealt.vue';
 import Color from './color.vue';
 import Colors from './colors.vue';
+import colorNamer from "./colorNamer.vue";
 import store from "./store";
 
-Vue.use(VueMeta)
+Vue.use(VueMeta);
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Homealt },
+  {
+    path: '/',
+    component: Homealt,
+  },
   { path: '/color/:color_id', component: Color },
   { path: '/color/:color_id/:bestof', component: Color },
-  { path: '/:colors_id', component: Colors },
+  { path: '/palette/:colors_id', component: Colors },
+  { path: '/submit/', component: colorNamer },
 ];
 
 const router = new VueRouter({
