@@ -6,37 +6,52 @@
       </div>
 
       <div class="blabla__right">
-        <article>
-          <h2>Usage</h2>
+        <article aria-label="What is Color Parrot?">
           <p>
-            Mention <a href="https://twitter.com/color_parrot">@color_parrot</a>
-            in a reply to a Tweet containing an image and ask "@color_parrot what is this color?"
-            to get a response containing a palette per image.
+            <a href="https://twitter.com/color_parrot">@color_parrot</a> is a Twitter
+            bot that can identify and name colors in images. It also tweets a random color name every
+            few hours.
+          </p>
+        </article>
+        <article>
+          <h2>Bot Usage</h2>
+          <p>
+            Reply or quote a tweet containing an image and mention
+            <a href="https://twitter.com/color_parrot">@color_parrot</a>.
+            Write <mark>@color_parrot what is this color?</mark>
+            to get a response containing your unique palette.
           </p>
 
           <aside>
             <h3>Specify the number of colors to extract</h3>
             <p>
               When asking for a color you can specify the number of colors you would like to get from the bot.
-              (Max. 32) just include a number anywhere in the tweet. Ex: "@color_parrot what are those colors? I need 6 of them..."
+              (Max. 32) just include a number anywhere in the tweet. Ex: <mark>@color_parrot what are those colors? I need 6 of them...</mark>
             </p>
           </aside>
 
           <aside>
             <h3>Want more colors? No problem!</h3>
             <p>
-              Respond with a tweet containing the word "more" to any of the bot's responses to get all the colors.
+              Respond with a tweet containing the word <mark>more</mark> to any of the bot's responses to get all the colors.
             </p>
           </aside>
         </article>
 
         <article>
           <h2>About color parrot</h2>
+          <aside>
+            <h3>Sources</h3>
 
-          <h3>Who?</h3>
-          <p>
-            The creator of the bot is <a href="https://twitter.com/meodai">David Aerne</a>.
-          </p>
+            <p>
+              The color names come from a <a href="https://github.com/meodai/color-names">open-source list of names</a>.
+              Most names were invented by <a href="https://twitter.com/meodai">me</a>, but there are many names from <a href="https://github.com/meodai/color-names#sources-">other sources</a>.
+            </p>
+            <p>
+              The images and descriptions of each <a href="http://localhost:1234/color/ffdd0f/%E2%9D%A4">individual color</a> are fetched from Wikipedia.
+            </p>
+          </aside>
+
           <h3>Why?</h3>
           <p>
             I am maintaining an <a href="https://github.com/meodai/color-names">open-source list of names</a>
@@ -191,7 +206,7 @@
     h3 {
       margin-top: 3em;
       font-weight: 600;
-      font-size: 1.4rem;
+      font-size: 1rem;
       line-height: 1.15;
       letter-spacing: -0.03em;
       padding-right: 40%;
@@ -227,6 +242,11 @@
       }
     }
 
+    mark {
+      animation: bgwalk 15s linear infinite;
+      padding: 0 0.25em 0.1em;
+    }
+
     li {
       margin-top: 1em;
     }
@@ -252,6 +272,21 @@
     }
     75% {
       color: rgb(255, 102, 153);
+    }
+  }
+
+  @keyframes bgwalk {
+    0% {
+      background-color: rgb(238, 221, 0);
+    }
+    25% {
+      background-color: rgb(102, 204, 102);
+    }
+    50% {
+      background-color: rgb(17, 153, 255);
+    }
+    75% {
+      background-color: rgb(255, 102, 153);
     }
   }
 
