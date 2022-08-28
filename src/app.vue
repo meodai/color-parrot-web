@@ -27,13 +27,20 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
   font-family: Inter, sans-serif;
   font-size: calc(0.7rem + 0.8vw);
 
-  --c-bg: #212121;
-  --c-color: #fff;
+  --c-bg: #fff;
+  --c-color: #212121;
 
   --s-gutter: 2rem;
 
   background: var(--c-bg);
   color: var(--c-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #212121;
+    --c-color: #fff;
+  }
 }
 
 body, html, input {
@@ -60,22 +67,22 @@ input, select {
 }
 
 select {
-  color: #fff;
+  color: var(--c-bg);
   width: 100%;
   box-sizing: border-box;
   -webkit-appearance: none;
   border: 0;
-  box-shadow: 0 1px 0 0 #fff;
+  box-shadow: 0 1px 0 0 var(--c-bg);
   border-radius: 0;
   padding: 0.25rem 1rem 0.25rem 0rem;
   background-color: transparent;
   background-size: 1.25em 1.25em;
-  background-image: conic-gradient(#fff 5%, transparent 0 95%, #fff 0);
+  background-image: conic-gradient(var(--c-bg) 5%, transparent 0 95%, var(--c-bg) 0);
   background-repeat: no-repeat;
   background-position: right 0% top 120%;
 
   option {
-    color: #000;
+    color: var(--c-color);
   }
 
   &:focus {

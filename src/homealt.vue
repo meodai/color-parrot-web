@@ -174,7 +174,7 @@ export default Vue.extend({
     left: 50%;
     width: 10vw;
     transform: translate(-50%, -50%);
-    //background: #fff;
+
     border-radius: 50%;
     padding: 1.5rem;
     z-index: 10;
@@ -185,21 +185,30 @@ export default Vue.extend({
 
 
     path, use {
-      stroke: #fff;
+      stroke: var(--c-color);
       stroke-width: 5px;
+
+      @media (prefers-color-scheme: light) {
+        stroke-width: 1.5px;
+        stroke: rgba(0,0,0,0.8);
+      }
     }
 
     .crest {
-      mix-blend-mode:multiply;
+      mix-blend-mode: multiply;
       transform-origin: 110px 110px;
       transform: rotate(0deg);
-      animation: 1000ms standup forwards cubic-bezier(.3,.7,0,1);
+      animation: 1000ms standup forwards cubic-bezier(.3, .7, 0, 1);
       animation-play-state: paused;
       animation-delay: 1200ms;
 
       .has-noAnimation & {
         animation-delay: 200ms;
         animation-play-state: running;
+      }
+
+      @media (prefers-color-scheme: light) {
+        mix-blend-mode: lighten;
       }
     }
 
@@ -244,7 +253,7 @@ export default Vue.extend({
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    color: #fff;
+    color: var(--c-color);
     font-weight: 200;
     font-size: 1.5rem;
 
@@ -376,8 +385,9 @@ export default Vue.extend({
 
 
   .footer {
-    --color-inverted: #fff;
-    --c-black: #212121;
+    --color-inverted: var(--c-color);
+    --c-black: var(--c-bg);
+
     input {
       background-color: transparent;
       width: 100%;

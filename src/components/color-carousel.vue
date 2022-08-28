@@ -190,15 +190,20 @@
       transition: 200ms transform, 200ms box-shadow;
 
 
-      box-shadow: 0 0 2rem #212121;
-      //box-shadow: 0 1rem 8rem var(--color);
+      box-shadow: 0 0 2rem var(--c-bg);
 
       @media (orientation: portrait) {
         transform: scale(0.6);
       }
+
+      @media (prefers-color-scheme: light) {
+        box-shadow: 0 1rem 8rem var(--color);
+      }
     }
+
     &:hover {
       z-index: 2;
+
       > * {
         transform: scale(1.1);
         box-shadow: 0 0rem 5rem var(--color);

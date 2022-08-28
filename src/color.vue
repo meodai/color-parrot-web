@@ -1,5 +1,5 @@
 <template>
-  <div class="color-detail" v-bind:class="{'color-detail--visible': isReady && show}">
+  <div class="color-detail" v-bind:class="{'color-detail--visible': isReady && show}" v-bind:style="{'--color': color}">
     <div class="color-detail__swatch">
       <colorswatch
         v-bind:color="color"
@@ -114,7 +114,7 @@ export default Vue.extend({
 
   &__close {
     position: absolute;
-    color: #fff;
+    color: var(--c-color);
     padding: var(--s-gutter, 2rem);
     top: 0;
     right: 0;
@@ -124,7 +124,7 @@ export default Vue.extend({
       width: 1.8rem;
       height: 1.8rem;
       line {
-        stroke: #fff;
+        stroke: var(--c-color);
         stroke-width: 0px;
         stroke-linecap: round;
         transition: 333ms stroke-width ease-in 1000ms;
@@ -156,6 +156,23 @@ export default Vue.extend({
     top: 50vh;
     width: 40%;
   }
+
+
+  @media (prefers-color-scheme: light) {
+    &::before {
+      opacity: 0;
+      position: absolute;
+      content: '';
+      inset: 0;
+      box-shadow: 0 1rem 8rem var(--color);
+      transition: 1000ms opacity cubic-bezier(.3,.7,0,1);
+      transition-delay: 900ms;
+      transform: scale(.8);
+      .color-detail--visible & {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .color-detail--visible .color-detail__swatch {
@@ -177,8 +194,8 @@ export default Vue.extend({
   //--s-label-height: calc((.6rem + 5vmin) * 1.45);
   //height: calc(var(--s-label-height) + 45vw);
   overflow-y: scroll;
-  background: #fff;
-  color: #001;
+  background: var(--c-color);
+  color: var(--c-bg);
 
   left: 0;
   top: 0;

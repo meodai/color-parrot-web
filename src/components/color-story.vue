@@ -282,7 +282,6 @@
 .color-story {
   --gutter: var(--s-gutter, 2rem);
 
-
   font-size: .7rem;
 
   h1, h2 {
@@ -341,7 +340,7 @@
     display: inline-block;
     text-transform: capitalize;
     margin-top: 1em;
-    color: #000;
+    color: var(--c-bg);
     text-decoration-thickness: .4em;
     text-decoration-color: var(--currentColor);
   }

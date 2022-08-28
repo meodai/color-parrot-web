@@ -137,14 +137,14 @@
   .blabla {
 
     ::-moz-selection {
-      color: #000;
-      background: #fff;
+      color: var(--c-bg);
+      background: var(--c-color);
       opacity: 1;
     }
     ::selection {
-      color: #000;
+      color: var(--c-bg);
       opacity: 1;
-      background: #fff;
+      background: var(--c-color);
     }
     position: relative;
     margin: calc(50vh + 10rem) auto 2rem;
@@ -188,6 +188,7 @@
       letter-spacing: -0.01em;
       line-height: .9;
       text-align: center;
+
       i {
         display: block;
         margin-bottom: -0.3em;
@@ -237,7 +238,7 @@
       z-index: 15;
 
       &:hover {
-        color: #fff;
+        color: var(--c-color);
         animation: none;
       }
     }
