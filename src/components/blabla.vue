@@ -9,8 +9,8 @@
         <article aria-label="What is Color Parrot?">
           <p>
             <a href="https://twitter.com/color_parrot">@color_parrot</a> is a Twitter
-            bot that can identify and name colors in images. It also tweets a random color name every
-            few hours.
+            bot capable of naming and identify colors in images. Every several hours,
+            it tweets a random color.
           </p>
         </article>
         <article>
