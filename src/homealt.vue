@@ -164,6 +164,8 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
+  @use "sass:math";
+
   :root {
     overflow-x: hidden;
   }
@@ -288,7 +290,7 @@ export default Vue.extend({
 
       @for $i from 1 to 27 {
        &:nth-child(#{$i}) {
-         transform: translate(-50%,-50%) rotate($i/27 * 360deg - 90deg) translateY(-7rem);
+         transform: translate(-50%,-50%) rotate(math.div($i, 27) * 360deg - 90deg) translateY(-7rem);
        }
       }
     }

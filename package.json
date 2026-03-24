@@ -2,22 +2,16 @@
   "name": "color-parrot-www",
   "version": "1.0.0",
   "description": "company website",
-  "app": "src/index.html",
   "scripts": {
-    "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/*.html",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "npm run build",
     "pretest": "npm run lint",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint --ext .js",
     "lint:css": "npm run lint:css:scss",
     "lint:css:scss": "stylelint 'src/**/*.scss'"
-  },
-  "targets": {
-    "main": false,
-    "browser": {
-      "publicUrl": "./"
-    }
   },
   "repository": {
     "type": "git",
@@ -31,27 +25,15 @@
   },
   "homepage": "https://github.com/meodai/elastiq#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.2",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@vue/component-compiler-utils": "^3.2.0",
-    "autoprefixer": "^9.7.6",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
+    "@vitejs/plugin-vue2": "^2.3.0",
+    "autoprefixer": "^10.4.0",
     "git-cz": "^4.7.6",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-sitemap": "^2.1.6",
-    "parcel-plugin-static-files-copy": "^2.3.1",
     "postcss": "^8.2.13",
-    "postcss-modules": "^2.0.0",
     "sass": "^1.26.5",
+    "vite": "^6.0.0",
     "vue-template-compiler": "^2.6.11"
   },
-  "staticFiles": {
-    "staticPath": "public"
-  },
   "dependencies": {
-    "@vue/composition-api": "^1.0.0-rc.8",
     "chroma-js": "^2.1.1",
     "color-description": "^0.2.0",
     "vue": "^2.6.12",
@@ -61,11 +43,5 @@
     "vuex": "^3.6.2",
     "zdog": "^1.1.2",
     "zfont": "^1.2.8"
-  },
-  "sitemap": {
-    "siteURL": "https://www.elastiq.ch/",
-    "exclude": [
-      "googleb38071574b573624.html"
-    ]
   }
 }

@@ -99,6 +99,7 @@
 </script>
 
 <style lang="scss">
+@use "sass:math";
 
 .color-carousel {
   position: fixed;
@@ -163,22 +164,22 @@
     .is-home-ready & {
       @for $i from 1 through 21 {
         &:nth-child(#{$i}) {
-          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(var(--scale));
+          transform: translate(-50%, -50%) rotate(#{math.div($i, 21) * 360}deg) translateY(var(--radius)) scale(var(--scale));
         }
       }
     }
 
     @for $i from 1 through 21 {
       &:nth-child(#{$i}) {
-        transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(-5rem) scale(.2);
-        animation-delay: #{$animationDuration/21 * -$i}s;
+        transform: translate(-50%, -50%) rotate(#{math.div($i, 21) * 360}deg) translateY(-5rem) scale(.2);
+        animation-delay: #{math.div($animationDuration, 21) * -$i}s;
       }
     }
 
     .has-noAnimation & {
       @for $i from 1 through 21 {
         &:nth-child(#{$i}) {
-          transform: translate(-50%, -50%) rotate(#{($i/21 * 360)}deg) translateY(var(--radius)) scale(var(--scale));
+          transform: translate(-50%, -50%) rotate(#{math.div($i, 21) * 360}deg) translateY(var(--radius)) scale(var(--scale));
           animation-delay: 0;
         }
       }
