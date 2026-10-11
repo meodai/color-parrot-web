@@ -4,7 +4,7 @@
     v-bind:aria-label="name"
     v-bind:class="{'color-story--visible': isVisible}"
     v-bind:style="{
-      '--currentColor': color.hex(),
+      '--currentColor': color,
       '--currentColorContrast': bestContrastTo,
       '--currentColorContrastShadow': bestContrastTo == '#fff' ? '#000' : '#fff',
     }"
@@ -66,7 +66,7 @@
 
 <script>
   import Vue from 'vue';
-  import chroma from 'chroma-js';
+  import { wcagContrast } from '../color-utils';
   import colordesc from './color-desc';
 
   const nahWords = ['the', 'a', 'in', 'of', 'an', 'on'];
@@ -140,7 +140,7 @@
     },
     computed: {
       bestContrastTo: function () {
-        return chroma.contrast(this.color, '#fff') > chroma.contrast(this.color, '#000') ? '#fff' : '#000';
+        return wcagContrast(this.color, '#fff') > wcagContrast(this.color, '#000') ? '#fff' : '#000';
       },
       images: function () {
         if (this.media.length) {

@@ -10,13 +10,13 @@
 
 <script>
 import Vue from 'vue';
-import chroma from 'chroma-js';
+import { parse, formatHex } from '../color-utils';
 
 export default Vue.extend({
   data: function() {
     return {
       colorvalue: "",
-      chromaColors: [],
+      parsedColors: [],
     }
   },
   props: {
@@ -24,19 +24,18 @@ export default Vue.extend({
   computed: {
     colors: function () {
       const rawlist = this.colorvalue.split(',');
-      const chromaColors = [];
+      const parsedColors = [];
 
       rawlist.forEach(element => {
-        try {
-          chromaColors.push(chroma(element));
-        } catch (err) {
-          console.log(err)
+        const parsed = parse(element.trim());
+        if (parsed) {
+          parsedColors.push(formatHex(parsed));
         }
       });
 
-      this.chromaColors = chromaColors;
+      this.parsedColors = parsedColors;
 
-      return chromaColors.join();
+      return parsedColors.join();
     }
   }
 });

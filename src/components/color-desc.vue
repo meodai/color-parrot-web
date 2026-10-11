@@ -10,7 +10,6 @@
 
 <script>
 import Vue from 'vue';
-import chroma from 'chroma-js';
 import ColorDescription from '../colorlore';
 
 export default Vue.extend({

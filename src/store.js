@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { toRgb, toHsl, toLab, rgbToCmyk } from './color-utils';
 
 Vue.use(Vuex);
 
@@ -21,35 +22,39 @@ export default new Vuex.Store({
     colorModes: {
       hex: {
         label: 'hex',
-        fn: color => color.hex(),
+        fn: color => color,
       },
       rgb: {
         label: 'RGB',
-        fn: color => color.rgb().reduce((r,v,i) => `${r} ${v}`,''),
+        fn: color => {
+          const { r, g, b } = toRgb(color);
+          return `${Math.round(r * 255)} ${Math.round(g * 255)} ${Math.round(b * 255)}`;
+        },
       },
       gl: {
         label: 'RGB Percent',
         fn: color => {
-          let colorValue = color.gl();
-          colorValue.pop()
-          return colorValue.reduce((r,v,i) => `${r} ${Math.round(v*100)}%`,'');
+          const { r, g, b } = toRgb(color);
+          return `${Math.round(r * 100)}% ${Math.round(g * 100)}% ${Math.round(b * 100)}%`;
         },
       },
       hsl: {
         label: 'HSL',
         fn: color => {
-          let colorValue = color.hsl();
-          colorValue.pop()
-          return colorValue.reduce((r,v,i) => `${r} ${i ? Math.floor(v * 100) + '%' : Math.floor(v) + '°'}`,'');
+          const { h, s, l } = toHsl(color);
+          return `${Math.floor(h || 0)}° ${Math.floor(s * 100)}% ${Math.floor(l * 100)}%`;
         }
       },
       cmyk: {
         label: 'CMYK',
-        fn: color => color.cmyk().reduce((r,v,i) => `${r} ${Math.floor(v * 100)}°`,''),
+        fn: color => rgbToCmyk(color).map(v => `${Math.floor(v * 100)}%`).join(' '),
       },
       lab: {
         label: 'LAB',
-        fn: color => color.lab().reduce((r,v,i) => `${r} ${Math.floor(v)}`,''),
+        fn: color => {
+          const { l, a, b } = toLab(color);
+          return `${Math.floor(l)} ${Math.floor(a)} ${Math.floor(b)}`;
+        },
       },
     }
   },

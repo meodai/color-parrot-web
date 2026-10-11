@@ -8,38 +8,13 @@
       <div class="blabla__right">
         <article aria-label="What is Color Parrot?">
           <p>
-            <a href="https://twitter.com/color_parrot">@color_parrot</a> is a Twitter
-            bot capable of naming and identify colors in images. Every several hours,
-            it tweets a random color.
+            Color Parrot is a color exploration tool. Look up any color to discover its name,
+            history, and related shades. Browse colors by navigating to <mark>/color/ff6347</mark> with any hex value.
           </p>
-        </article>
-        <article>
-          <h2>Bot Usage</h2>
-          <p>
-            Reply or quote a tweet containing an image and mention
-            <a href="https://twitter.com/color_parrot">@color_parrot</a>.
-            Write <mark>@color_parrot what is this color?</mark>
-            to get a response containing your unique palette.
-          </p>
-
-          <aside>
-            <h3>Specify the number of colors to extract</h3>
-            <p>
-              When asking for a color you can specify the number of colors you would like to get from the bot.
-              (Max. 32) just include a number anywhere in the tweet. Ex: <mark>@color_parrot what are those colors? I need 6 of them...</mark>
-            </p>
-          </aside>
-
-          <aside>
-            <h3>Want more colors? No problem!</h3>
-            <p>
-              Respond with a tweet containing the word <mark>more</mark> to any of the bot's responses to get all the colors.
-            </p>
-          </aside>
         </article>
 
         <article>
-          <h2>About color parrot</h2>
+          <h2>About Color Parrot</h2>
           <aside>
             <h3>Sources</h3>
 
@@ -55,16 +30,20 @@
           <h3>Why?</h3>
           <p>
             I am maintaining an <a href="https://github.com/meodai/color-names">open-source list of names</a>
-            that is <a href="https://github.com/meodai/color-names/issues/98">used by many other apps and websites</a>.
+            that is used by projects like
+            <a href="https://meodai.github.io/poline/">Poline</a>,
+            <a href="https://meodai.github.io/rampensau/">Rampensau</a>,
+            <a href="https://github.com/superhighfives/pika">Pika</a>,
+            and <a href="https://github.com/meodai/color-names/issues/98">many more</a>.
           </p>
           <p>
             To be able to measure what names are better than others, or that are just plain bad I collect the likes and the reactions
-            to each color. So by using the bot you are actively contributing to an open-source project.
+            to each color.
           </p>
           <h3>Who pays for all that?</h3>
           <p>I am so glad you asked. Hopefully you!</p>
           <table>
-              <caption>Costs of running the bot (in USD)</caption>
+              <caption>Costs of running Color Parrot (in USD)</caption>
               <thead>
                   <tr>
                       <th scope="col">Items</th>

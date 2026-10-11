@@ -1,4 +1,4 @@
-import chroma from 'chroma-js';
+import { parse, toHsl, toRgb, wcagContrast } from './color-utils';
 
 // https://www.writerswrite.co.za/204-words-that-describe-colours/
 
@@ -615,27 +615,26 @@ export default class ColorDescription {
   }
 
   _parseColor (color) {
-    if (chroma.valid(color)) {
-      return chroma(color);
+    const parsed = parse(color);
+    if (parsed) {
+      return parsed;
     } else {
-      throw new TypeError('Color is not a valid color, check the chroma.js documentation.', 'color-description', 14);
+      throw new TypeError('Color is not a valid color.', 'color-description', 14);
     }
   }
 
   get temeratureAdjectives () {
-    const goal = this.color.temperature();
+    // Approximate color temperature from RGB
+    const { r, g, b } = toRgb(this.color);
+    const goal = (r * 255 * 6500 + g * 255 * 6500 + b * 255 * 6500) / ((r + g + b) * 255 || 1);
     return temperatures.reduce((prev, curr) =>
       (Math.abs(curr.value - goal) < Math.abs(prev.value - goal) ? curr : prev)
     , {value: 0});
   }
 
   percentages (model='gl') {
-    const props = this.color[model]();
-    if (
-      model==='gl'
-    ){
-      props.pop() // removes alpha
-    }
+    const rgb = toRgb(this.color);
+    const props = [rgb.r, rgb.g, rgb.b];
     const total = props.reduce((r,d) => r + d, 0);
     return props.map(c => total ? c/total : 0);
   }
@@ -647,17 +646,19 @@ export default class ColorDescription {
   }
 
   _getWords (scope = 'adjectives') {
-    const hsl = this.color.hsl();
-
     return HSLadjectives.reduce((rem, current) => {
       if( !current.hasOwnProperty(scope) ) {
         return rem;
       }
       const colorModels = Object.keys(current.criteria);
       const matchesEveryCriteria = colorModels.every(colorModel => {
-        const colorAsModel = this.color[colorModel]();
-        if (colorModel === 'hsl' || colorModel === 'gl' || colorModel === 'rgb') {
-          colorAsModel.pop() // removes alpha
+        let colorAsModel;
+        if (colorModel === 'hsl') {
+          const hsl = toHsl(this.color);
+          colorAsModel = [hsl.h || 0, hsl.s, hsl.l];
+        } else if (colorModel === 'gl' || colorModel === 'rgb') {
+          const rgb = toRgb(this.color);
+          colorAsModel = [rgb.r, rgb.g, rgb.b];
         }
 
         return current.criteria[colorModel].every((criterium, i) => {
@@ -690,7 +691,7 @@ export default class ColorDescription {
   }
 
   get bestContrast () {
-    return chroma.contrast(this.color, 'black') > chroma.contrast(this.color, 'white') ? 'black' : 'white';
+    return wcagContrast(this.color, 'black') > wcagContrast(this.color, 'white') ? 'black' : 'white';
   }
 
   getAdjectivesList (random, limit) {

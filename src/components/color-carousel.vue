@@ -21,7 +21,7 @@
 <script>
   import Vue from 'vue';
   import colorswatchsimple from './color-swatch-simple.vue';
-  import chroma from 'chroma-js';
+  import { hslToHex } from '../color-utils';
 
   export default Vue.extend({
     components: {
@@ -41,11 +41,11 @@
         const hueShift = (360/this.total) * this.startColor[0];
 
         const rainbow = (new Array(this.total)).fill('').map((d,i) => (
-          chroma.hsl(
+          hslToHex(
             (-hueShift + (i/this.total * 360)) % 360,
             parseFloat(this.startColor[1]),
             parseFloat(this.startColor[2])
-          ).hex()
+          )
         ));
 
         this.fetchColors(rainbow);

@@ -41,7 +41,7 @@
 import Vue from "vue";
 import colorswatch from './components/color-swatch';
 import colorstory from './components/color-story';
-import chroma from 'chroma-js';
+import { formatHex, parse } from './color-utils';
 
 export default Vue.extend({
   components: {
@@ -74,7 +74,7 @@ export default Vue.extend({
   },
   computed: {
     color () {
-      return chroma(this.currentColor.requestedHex);
+      return this.currentColor.requestedHex;
     },
     currentColor () {
       return this.$store.state.currentColor;

@@ -5,7 +5,7 @@
       'colorswatch--visible': isVisible,
     }"
     v-bind:style="{
-      '--c-color': color.hex(),
+      '--c-color': color,
       '--c-shade0': shade0,
       '--c-shade1': shade1,
     }"
@@ -48,11 +48,17 @@
 
 <script>
   import Vue from 'vue';
+  import { wcagLuminance, toLab, formatHex } from '../color-utils';
+
+  function adjustLightness(color, amount) {
+    const lab = toLab(color);
+    return formatHex({ ...lab, l: Math.max(0, Math.min(100, lab.l + amount)) });
+  }
 
   export default Vue.extend({
     props: {
       name: String,
-      color: Object,
+      color: String,
       isVisible: Boolean,
     },
     data: function () {
@@ -70,21 +76,13 @@
         return this.$store.state.colorModes[this.$store.state.colorMode].fn(this.color);
       },
       lum: function () {
-        return this.color.luminance();
+        return wcagLuminance(this.color);
       },
       shade0: function () {
-        if (this.lum < .5) {
-          return this.color.brighten(1.5);
-        } else {
-          return this.color.darken(1.5);
-        }
+        return adjustLightness(this.color, this.lum < .5 ? 25 : -25);
       },
       shade1: function () {
-        if (this.lum < .5) {
-          return this.color.brighten(.75);
-        } else {
-          return this.color.darken(.75);
-        }
+        return adjustLightness(this.color, this.lum < .5 ? 12 : -12);
       },
     },
   });

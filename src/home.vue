@@ -32,52 +32,40 @@
     </div>
 
     <h1>Color Parrot</h1>
-    <h2>The Color companion</h2>
+    <h2>The Color Companion</h2>
 
     <article>
       <h2>Usage</h2>
       <p>
-        Mention <a href="https://twitter.com/color_parrot">@color_parrot</a>
-        in a reply to a Tweet containing an image and aks "@color_parrot what is this color?"
-        to get a repsonse containg a palette per image.
+        Look up any color by navigating to <strong>/color/ff6347</strong> with any hex value
+        to discover its name, history, and related shades.
       </p>
-
-      <aside>
-        <h3>Specify the number of colors to extract</h3>
-        <p>
-          When asking for a color you can specify the amount of colors you would like to get from the bot.
-          (Max. 32) just include a number anywhere in the tweet. Ex: "@color_parrot what are those colors? I need 6 of them..."
-        </p>
-      </aside>
-
-      <aside>
-        <h3>Want more colors? No problem!</h3>
-        <p>
-          Repond with a tweet containg the word "more" to any of the bots reponses to get all the colors.
-        </p>
-      </aside>
     </article>
 
     <article>
-      <h2>About color parrot</h2>
+      <h2>About Color Parrot</h2>
 
       <h3>Who?</h3>
       <p>
-        The creator of the bot is <a href="https://twitter.com/meodai">David Aerne</a>.
+        Color Parrot is made by <a href="https://github.com/meodai">David Aerne</a>.
       </p>
       <h3>Why?</h3>
       <p>
         I am maintaing an <a href="https://github.com/meodai/color-names">open-source list of names</a>
-        that is <a href="https://github.com/meodai/color-names/issues/98">used by many other apps and websites</a>.
+        that is used by projects like
+        <a href="https://meodai.github.io/poline/">Poline</a>,
+        <a href="https://meodai.github.io/rampensau/">Rampensau</a>,
+        <a href="https://github.com/superhighfives/pika">Pika</a>,
+        and <a href="https://github.com/meodai/color-names/issues/98">many more</a>.
       </p>
       <p>
         To be able to measure what names are better then others, or that are just plain bad I collect the likes and the reactions
-        to each individual color. So by using the bot you are actively contributing to an open-source project.
+        to each individual color.
       </p>
       <h3>Who pays for all that?</h3>
       <p>I am so glad you asked. Hopefully you!</p>
       <table>
-          <caption>Costs of running the bot (in USD)</caption>
+          <caption>Costs of running Color Parrot (in USD)</caption>
           <thead>
               <tr>
                   <th scope="col">Items</th>
@@ -135,7 +123,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { randomHex, scaleColors, toHsl, formatHex } from './color-utils';
 import Vue from "vue";
 import colorswatch from './components/color-swatch';
 
@@ -175,16 +163,15 @@ export default Vue.extend({
   },
   methods: {
     fillColors () {
-      const c1 = chroma.random();
-      const c2 = c1.set('hsl.h', '+180');
+      const c1 = randomHex();
+      const hsl = toHsl(c1);
+      const c2 = formatHex({ mode: 'hsl', h: (hsl.h || 0) + 180, s: hsl.s, l: hsl.l });
 
-      this.colors = chroma.scale([c1,c2])
-                    .mode('lch')
-                    .colors(30)
-                    .map(c => {return {
-                      color: chroma(c),
+      this.colors = scaleColors([c1, c2], 'lch', 30)
+                    .map(c => ({
+                      color: c,
                       ready: true,
-                    }})
+                    }));
 
       this.colorsNamed = (new Array(30)).fill('').map(i => {
         return {name: ''};
@@ -194,7 +181,7 @@ export default Vue.extend({
       console.log(index);
       this.colors[index].ready = false;
       const timer = setTimeout(() => {
-        this.colors[index].color = chroma.random();
+        this.colors[index].color = randomHex();
         this.colors[index].ready = true;
       }, 1000);
     },
@@ -203,7 +190,7 @@ export default Vue.extend({
       const apiURL = new URL('https://api.color.pizza/v1/');
 
       const params = {
-        values: this.colors.map(c => c.color.hex().replace('#', '')),
+        values: this.colors.map(c => c.color.replace('#', '')),
         goodnamesonly: false,
         noduplicates: true,
       }

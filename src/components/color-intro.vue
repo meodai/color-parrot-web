@@ -21,7 +21,7 @@
 
 <script>
   import Vue from 'vue';
-  import chroma from 'chroma-js';
+  import { scaleColors, toHsl, formatHex } from '../color-utils';
   import colorCard from './color-card.vue';
 
   export default Vue.extend({
@@ -44,7 +44,9 @@
       changeColor: function (color) {
         this.currentColor = color;
 
-        let colorScale = chroma.scale([color, chroma(color).set('hsl.h', '+100').hex()]).mode('lch').colors(this.exampleColorLength);
+        const hsl = toHsl(color);
+        const endColor = formatHex({ mode: 'hsl', h: (hsl.h || 0) + 100, s: hsl.s, l: hsl.l });
+        let colorScale = scaleColors([color, endColor], 'lch', this.exampleColorLength);
         //(new Array(this.exampleColorLength)).fill(color)
         this.colors = this.$store.getters.namedColors(
           colorScale

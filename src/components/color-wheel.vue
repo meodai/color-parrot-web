@@ -10,7 +10,7 @@
 </template>
 <script>
   import Vue from 'vue';
-  import chroma from 'chroma-js';
+  import { hslToHex, toHsl } from '../color-utils';
 
   function pointToAnglePercentile (
     x, y, centerX, centerY
@@ -87,7 +87,7 @@
       },
 
       setColor: function(){
-          this.hex = chroma.hsl(this.h, this.s, this.l).hex();
+          this.hex = hslToHex(this.h, this.s, this.l);
 
           this.$emit('color-update', {
             h: this.h,
@@ -101,11 +101,13 @@
         let [h,s,l] = [0,0,0];
 
         if (this.colorhex) {
-          [h,s,l] = chroma(this.colorhex).hsl();
+          const parsed = toHsl(this.colorhex);
+          h = parsed.h || 0; s = parsed.s; l = parsed.l;
         } else if (this.colorhsl) {
           [h,s,l] = this.colorhsl;
         } else {
-          [h,s,l] = chroma(this.hex).hsl()
+          const parsed = toHsl(this.hex);
+          h = parsed.h || 0; s = parsed.s; l = parsed.l;
         }
 
         this.h = h || 0;

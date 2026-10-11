@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import chroma from 'chroma-js';
+import { randomHex, isValid, formatHex, parse, wcagLuminance, toLch, toHsl, toRgb, toLab, rgbToCmyk } from './color-utils';
 import Vue from "vue";
 import colorswatch from './components/color-swatch';
 //import color3d from './components/color-3d';
@@ -99,8 +99,8 @@ import colorlist from './components/color-list';
 import colorcircle from './components/color-circle';
 
 const sorts = {
-  'magic': colors => colors.sort((a, b) => (b.luminance() - a.luminance()) - (b.hcl()[0] - a.hcl()[0])),
-  'luminance': colors => colors.sort((a, b) => (b.luminance() - a.luminance())),
+  'magic': colors => colors.sort((a, b) => (wcagLuminance(b) - wcagLuminance(a)) - ((toLch(b).h || 0) - (toLch(a).h || 0))),
+  'luminance': colors => colors.sort((a, b) => (wcagLuminance(b) - wcagLuminance(a))),
 };
 
 export default Vue.extend({
@@ -114,8 +114,8 @@ export default Vue.extend({
   data() {
     return {
       colors: [
-        chroma.random(),
-        chroma.random()
+        randomHex(),
+        randomHex()
       ],
       colorDisplayMode: 'hex',
       show: false,
@@ -134,10 +134,10 @@ export default Vue.extend({
       return `${first}<br/>${last[last.length - 1]}`;
     },
     colorsHex: function () {
-      return this.sortedColors.map(c => c.hex());
+      return this.sortedColors;
     },
     namesSortedByLum: function () {
-      return [...this.colorNames].sort((a,b) => chroma(b.requestedHex).luminance() - chroma(a.requestedHex).luminance() )
+      return [...this.colorNames].sort((a,b) => wcagLuminance(b.requestedHex) - wcagLuminance(a.requestedHex) )
     },
     sortedColors: function () {
       if (sorts.hasOwnProperty(this.sort)) {
@@ -166,21 +166,21 @@ export default Vue.extend({
         const rawColors = hashStr.split('-');
 
         this.colors = rawColors
-          .map(rawColor => chroma.valid('#' + rawColor) && chroma('#' + rawColor))
-          .filter(c => c);
+          .filter(rawColor => isValid('#' + rawColor))
+          .map(rawColor => formatHex(parse('#' + rawColor)));
       }
 
       if ( !window.location.hash || !this.colors.length) {
         this.colors = [
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
         ]
       }
     },
@@ -189,37 +189,42 @@ export default Vue.extend({
 
       setTimeout(() => {
         this.colors = [
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
-          chroma.random(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
+          randomHex(),
         ];
         this.fetchNames();
       }, 500);
 
     },
     colorValue: function(color) {
-      let colorValue = color[this.colorDisplayMode]();
+      const mode = this.colorDisplayMode;
 
-      if ( this.colorDisplayMode === 'hsl') {
-        colorValue.pop();
-        colorValue = colorValue.reduce((r,v,i) => `${r} ${i ? Math.floor(v * 100) + '%' : Math.floor(v) + '°'}`,'');
-      } else if (this.colorDisplayMode === 'lab') {
-        colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.floor(v)}`,'');
-      } else if (this.colorDisplayMode === 'cmyk') {
-        colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.floor(v * 100)}°`,'');
-      } else if (this.colorDisplayMode === 'rgb') {
-        colorValue = colorValue.reduce((r,v,i) => `${r} ${v}`,'');
-      } else if (this.colorDisplayMode === 'gl') {
-        colorValue.pop();
-        colorValue = colorValue.reduce((r,v,i) => `${r} ${Math.round(v*100)}%`,'');
+      if (mode === 'hex') {
+        return color;
+      } else if (mode === 'hsl') {
+        const { h, s, l } = toHsl(color);
+        return `${Math.floor(h || 0)}° ${Math.floor(s * 100)}% ${Math.floor(l * 100)}%`;
+      } else if (mode === 'lab') {
+        const { l, a, b } = toLab(color);
+        return `${Math.floor(l)} ${Math.floor(a)} ${Math.floor(b)}`;
+      } else if (mode === 'cmyk') {
+        const cmyk = rgbToCmyk(color);
+        return cmyk.map(v => `${Math.floor(v * 100)}%`).join(' ');
+      } else if (mode === 'rgb') {
+        const { r, g, b } = toRgb(color);
+        return `${Math.round(r * 255)} ${Math.round(g * 255)} ${Math.round(b * 255)}`;
+      } else if (mode === 'gl') {
+        const { r, g, b } = toRgb(color);
+        return `${Math.round(r * 100)}% ${Math.round(g * 100)}% ${Math.round(b * 100)}%`;
       }
-      return colorValue;
+      return color;
     },
     fetchNames: function() {
       const url = new URL('https://api.color.pizza/v1/');

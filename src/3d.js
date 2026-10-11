@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import './three/OrbitControls.js';
-import chroma from 'chroma-js';
+import { toRgb, toHsl, toHsv, toLab, toLch } from './color-utils';
 
 let cam, scene, root, renderer, controls, layers,
   objects = [], cubeSize = 100, dotSize = 1.5,
@@ -129,16 +129,25 @@ function addParticles(colorNames, cMode) {
     let colorComp;
 
     if (mode.func === 'yuv') {
-      colorComp = yuv(chroma(col.hex).rgb());
+      const { r, g, b } = toRgb(col.hex);
+      colorComp = yuv([r * 255, g * 255, b * 255]);
     } else if (mode.func === 'hwb') {
-      const [hsvH, hsvS, hsvV] = chroma(col.hex).hsv();
+      const hsv = toHsv(col.hex);
       colorComp = [
-        hsvH,
-        (1 - hsvS) * hsvV / 1,
-        1 - hsvV
+        hsv.h || 0,
+        (1 - hsv.s) * hsv.v / 1,
+        1 - hsv.v
       ]
     } else {
-      colorComp = chroma(col.hex)[mode.func]();
+      const converters = {
+        rgb: c => { const v = toRgb(c); return [v.r * 255, v.g * 255, v.b * 255]; },
+        hsl: c => { const v = toHsl(c); return [v.h || 0, v.s, v.l]; },
+        hsv: c => { const v = toHsv(c); return [v.h || 0, v.s, v.v]; },
+        lab: c => { const v = toLab(c); return [v.l, v.a, v.b]; },
+        lch: c => { const v = toLch(c); return [v.l, v.c, v.h || 0]; },
+        hsi: c => { const v = toHsl(c); return [v.h || 0, v.s, v.l]; },
+      };
+      colorComp = converters[mode.func](col.hex);
     }
 
 
